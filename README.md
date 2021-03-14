@@ -1,4 +1,4 @@
-# 10 Kleine Helferlein
+# 10 (85) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -6,7 +6,7 @@ Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-klei
 
 ## Bash
 
-1. Finde alle Dateien in einem Verzeichnis und kopiere sie in ein anderes Verzeichnis. Alle Dateieigenschaften bleiben erhalten.
+#### Finde alle Dateien in einem Verzeichnis und kopiere sie in ein anderes Verzeichnis. Alle Dateieigenschaften bleiben erhalten.
 
 ```
 find . -depth | cpio -pvdm /new_data
@@ -598,4 +598,6 @@ kubectl get pods -A| awk '{print "kubectel -n "$1 " delete pod "$2}'
 
 remove all secrets and restart pods with fresh service account token
 ```
+
+85
 
