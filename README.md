@@ -1,4 +1,4 @@
-# 10 (85) Kleine Helferlein
+# 10 (86) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -605,5 +605,10 @@ kubectl get pods -A| awk '{print "kubectel -n "$1 " delete pod "$2}'
 remove all secrets and restart pods with fresh service account token
 ```
 
-85
+#### Grab information from K8S resource description
+
+```
+kubectl get pods --namespace cognigy -l "app=prometheus-redis-exporter,release=prometheus-redis-persistent-exporter" -o jsonpath="{.items[0].metadata.name}"
+```
+86
 
