@@ -610,5 +610,12 @@ remove all secrets and restart pods with fresh service account token
 ```
 kubectl get pods --namespace cognigy -l "app=prometheus-redis-exporter,release=prometheus-redis-persistent-exporter" -o jsonpath="{.items[0].metadata.name}"
 ```
-86
+
+### Scale down all resources
+
+```
+kubectl -n default scale all --all --replicas=0
+```
+
+87
 
