@@ -617,5 +617,10 @@ kubectl get pods --namespace cognigy -l "app=prometheus-redis-exporter,release=p
 kubectl -n default scale all --all --replicas=0
 ```
 
-87
+### Force delete PODs in state Terminating
+
+```
+kubectl delete pod --grace-period=0 --force broken_pod
+``
+88
 
