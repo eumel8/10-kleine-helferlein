@@ -1,4 +1,4 @@
-# 10 (86) Kleine Helferlein
+# 10 (87) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -234,6 +234,12 @@ for i in `openstack volume list --status available -f value| awk '{print $1}'`;d
 
 ```
 for i in `openstack server list | grep k8s-00 | grep ranchermaster | awk '{print $2}'`;do openstack server delete $i;done
+```
+
+### create floating ip with fixed ip
+
+```
+openstack floating ip create --floating-ip-address 80.158.7.232 admin_external_net
 ```
 
 ## Dies & Das
