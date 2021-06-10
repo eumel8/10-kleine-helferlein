@@ -1,4 +1,4 @@
-# 10 (89) Kleine Helferlein
+# 10 (90) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -573,6 +573,11 @@ kubectl -n c-lvjds get nodes.management.cattle.io
 kubectl -n c-lvjds edit nodes.management.cattle.io m-a65b8ee3055b
 ```
 
+#### Get RKE system images
+
+```
+kubectl -n cattle-global-data get rkek8ssystemimages 
+```
 #### Node Cleanup
 
 * https://gist.githubusercontent.com/superseb/2cf186726807a012af59a027cb41270d/raw/eaa2d235e7693c2d1c5a2a916349410274bb95a9/cleanup.sh
@@ -634,5 +639,5 @@ kubectl -n default scale all --all --replicas=0
 ```
 kubectl delete pod --grace-period=0 --force broken_pod
 ``
-89
+90
 
