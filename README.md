@@ -1,4 +1,4 @@
-# 10 (90) Kleine Helferlein
+# 10 (91) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -83,6 +83,12 @@ Manchmal gibt es haessliche Zeilenverschiebungen. Dagegen hilft ein
 
 ```
 PS4='Line ${LINENO}: ' bash -x script
+```
+
+##### git-crypt list current key
+
+```
+for key in .git-crypt/keys/default/0/* ; do gpg -k $(echo $(basename $key) | sed -e 's/.gpg//') ; done ;
 ```
 
 ## MySQL
@@ -639,5 +645,5 @@ kubectl -n default scale all --all --replicas=0
 ```
 kubectl delete pod --grace-period=0 --force broken_pod
 ``
-90
+91
 
