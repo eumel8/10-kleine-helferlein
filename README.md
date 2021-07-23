@@ -1,4 +1,4 @@
-# 10 (91) Kleine Helferlein
+# 10 (92) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -556,6 +556,12 @@ docker rename etcd etcd-old
 # add addtional etcd nodes
 ```
 
+#### Explain Custome Resource Defintions
+
+```
+kubectl explain alertmanagerconfig.spec.receivers
+```
+
 ### Rancher
 
 #### Snapshot Restore in progres??
@@ -645,5 +651,5 @@ kubectl -n default scale all --all --replicas=0
 ```
 kubectl delete pod --grace-period=0 --force broken_pod
 ``
-91
+92
 
