@@ -1,4 +1,4 @@
-# 10 (93) Kleine Helferlein
+# 10 (94) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -564,6 +564,12 @@ kubectl explain alertmanagerconfig.spec.receivers
 
 ### Rancher
 
+#### Reset admin password
+
+```
+kubectl -n cattle-system exec -it <rancher-pod> -- reset-password
+```
+
 #### Snapshot Restore in progres??
 
 ```
@@ -678,5 +684,5 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 
 
 
-93
+94
 
