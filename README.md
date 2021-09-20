@@ -1,4 +1,4 @@
-# 10 (94) Kleine Helferlein
+# 10 (95) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -562,6 +562,15 @@ docker rename etcd etcd-old
 kubectl explain alertmanagerconfig.spec.receivers
 ```
 
+#### Set a StorageClass as default
+
+```
+kubectl edit sc sata
+metadata:
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+```
+
 ### Rancher
 
 #### Reset admin password
@@ -684,5 +693,5 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 
 
 
-94
+95
 
