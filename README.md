@@ -91,6 +91,13 @@ PS4='Line ${LINENO}: ' bash -x script
 for key in .git-crypt/keys/default/0/* ; do gpg -k $(echo $(basename $key) | sed -e 's/.gpg//') ; done ;
 ```
 
+##### get gitlab environment variables and convert to shell variables
+
+```
+curl -sq --header "PRIVATE-TOKEN: <gitlab-api-token>" "https://gitlab.com/api/v4/projects/188/variables" | jq -r '"export " + .[].key + "=" + .[].value'
+```
+
+
 ## MySQL
 
 #### Lege einen User an, vergebe ein Passwort und bestimmte Rechte
