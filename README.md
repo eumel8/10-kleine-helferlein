@@ -1,4 +1,4 @@
-# 10 (95) Kleine Helferlein
+# 10 (97) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -358,6 +358,12 @@ kubectl -n cattle-system describe pod rancher-7bdd99ccd4-v9rjm
 kubectl delete pod/rancher-7bdd99ccd4-4qgt5 -n cattle-system
 ```
 
+#### delete pod in state Terminating
+
+```
+kubectl delete pod/rancher-7bdd99ccd4-4qgt5 -n cattle-system --force
+```
+
 #### check deployments
 
 ```
@@ -700,5 +706,5 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 
 
 
-95
+97
 
