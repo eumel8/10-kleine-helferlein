@@ -1,4 +1,4 @@
-# 10 (98) Kleine Helferlein
+# 10 (99) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -689,7 +689,13 @@ kubectl -n default scale all --all --replicas=0
 
 ```
 kubectl delete pod --grace-period=0 --force broken_pod
-``
+```
+
+### Which (Cluster)RoleBindings are associated to a ServiceAccount
+
+```
+kubectl get clusterrolebindings -o json | jq -r '.items[] | select( .subjects // [] | .[] | [.kind,.namespace,.name] == ["ServiceAccount","cert-manager","cert-manager"]) | .metadata.name'
+```
 
 ## Terraform
 
@@ -712,5 +718,5 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 
 
 
-98
+99
 
