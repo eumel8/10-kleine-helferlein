@@ -1,4 +1,4 @@
-# 101 Kleine Helferlein
+# 102 Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -221,6 +221,12 @@ die checksum sollte gleich sein
 ```
 
 ## Docker
+
+### read Docker logs
+
+```
+docker logs kubelet 2>&1| less
+```
 
 #### Loesche alle Docker Container
 
@@ -730,5 +736,5 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 
 
 
-101
+102
 
