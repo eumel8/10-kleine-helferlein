@@ -1,4 +1,4 @@
-# 102 Kleine Helferlein
+# 10 (95) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -530,7 +530,7 @@ kubectl get pods -A -o=json | jq -c \
 '.items[] | {name: .metadata.name, namespace: .metadata.namespace, claimName:.spec.volumes[] | select( has ("persistentVolumeClaim") ).persistentVolumeClaim.claimName }'
 ```
 
-##### list pod name/resources
+#### list pod name/resources
 
 ```
 kubectl get pods -o json | jq '.items[].spec.containers[] | .name,.resources.limits'
@@ -736,5 +736,5 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 
 
 
-102
+95
 
