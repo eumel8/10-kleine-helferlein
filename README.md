@@ -1,4 +1,4 @@
-# 10 (99) Kleine Helferlein
+# 101 Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -642,6 +642,18 @@ kubectl -n ingress-nginx edit service openstack-lb
 ctr c list
 ```
 
+#### Containterd list containers within k3s
+
+```
+k3s crictl ps
+```
+
+#### Containterd list images within k3s
+
+```
+k3s crictl images
+```
+
 #### Downstream cluster can't connect to Rancher
 
 ```
@@ -718,5 +730,5 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 
 
 
-99
+101
 
