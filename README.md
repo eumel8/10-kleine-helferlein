@@ -1,4 +1,4 @@
-# 10 (95) Kleine Helferlein
+# 10 (96) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -596,6 +596,12 @@ metadata:
 for i in `kubectl get nodes --no-headers --output=name`;do echo $i; kubectl describe $i | grep "Allocated resources" -A 5;done
 ```
 
+#### Which ServiceAccount is defined in Workloads
+
+```
+kubectl -n kube-system get deployments -o json | jq -r '"name :",.items[].metadata.name,"container :",.items[].spec.template.spec.containers[].name,"serviceAccount :",.items[].spec.template.spec.serviceAccountName'
+```
+
 ### Rancher
 
 #### Reset admin password
@@ -736,5 +742,5 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 
 
 
-95
+96
 
