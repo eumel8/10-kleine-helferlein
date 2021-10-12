@@ -1,4 +1,4 @@
-# 10 (96) Kleine Helferlein
+# 10 (97) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -648,6 +648,12 @@ remove lb ingress selector io.cattle.field/appId: mcsps-openstack-cloud-controll
 kubectl -n ingress-nginx edit service openstack-lb 
 ```
 
+#### Show PODs in state 'Pending'
+
+```
+kubectl get pods --no-headers -A --field-selector=status.phase=Pending
+```
+
 #### Containterd list containers
 
 ```
@@ -742,5 +748,5 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 
 
 
-96
+97
 
