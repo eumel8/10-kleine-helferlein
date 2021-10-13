@@ -220,6 +220,12 @@ openssl rsa -noout -modulus -in server.key| openssl md5
 die checksum sollte gleich sein
 ```
 
+#### Which Ciphers are offered from a TLS connection
+
+```
+nmap --script ssl-enum-ciphers -p 443 cloud.telekom.de
+```
+
 ## Docker
 
 ### read Docker logs
