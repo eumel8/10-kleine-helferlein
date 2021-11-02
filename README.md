@@ -1,4 +1,4 @@
-# 10 (97) Kleine Helferlein
+# 10 (98) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -678,6 +678,13 @@ k3s crictl ps
 k3s crictl images
 ```
 
+#### Check cert validation on K3S cluster
+
+```
+cd /var/lib/rancher/k3s/server/tls
+for i in `ls *.crt`; do echo $i; openssl x509 -enddate -noout -in $i; done
+```
+
 #### Downstream cluster can't connect to Rancher
 
 ```
@@ -754,5 +761,5 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 
 
 
-97
+98
 
