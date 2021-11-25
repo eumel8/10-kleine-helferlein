@@ -1,4 +1,4 @@
-# 10 (98) Kleine Helferlein
+# 10 (99) Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -606,6 +606,12 @@ for i in `kubectl get nodes --no-headers --output=name`;do echo $i; kubectl desc
 
 ```
 kubectl -n kube-system get deployments -o json | jq -r '"name :",.items[].metadata.name,"container :",.items[].spec.template.spec.containers[].name,"serviceAccount :",.items[].spec.template.spec.serviceAccountName'
+```
+
+#### Which nodes are in which AZ
+
+```
+kubectl get nodes -o json | jq -r '.items[]| .metadata.labels."topology.kubernetes.io/zone" + " - " + .metadata.labels."kubernetes.io/hostname"' | sort
 ```
 
 ### Rancher
