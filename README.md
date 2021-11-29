@@ -1,4 +1,4 @@
-# 10 (99) Kleine Helferlein
+# 100 Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -608,6 +608,14 @@ for i in `kubectl get nodes --no-headers --output=name`;do echo $i; kubectl desc
 kubectl -n kube-system get deployments -o json | jq -r '"name :",.items[].metadata.name,"container :",.items[].spec.template.spec.containers[].name,"serviceAccount :",.items[].spec.template.spec.serviceAccountName'
 ```
 
+#### Which ServiceAccount used which (Cluster)RoleBindings
+
+```
+wget -qO- https://github.com/FairwindsOps/rbac-lookup/releases/download/v0.7.1/rbac-lookup_0.7.1_Linux_x86_64.tar.gz | tar xfz - rbac-lookup
+./rbac-lookup database-operator -k serviceaccount -o wide
+tar xvfz  
+```
+
 #### Which nodes are in which AZ
 
 ```
@@ -764,8 +772,4 @@ provider_installation {
 
 The plugin location on Linux will be ` ~/.terraform.d/plugin-cache/registry.terraform.io/opentelekomcloud/opentelekomcloud/1.25.3-SNAPSHOT-09496217/linux_amd64/terraform-provider-opentelekomcloud_v1.25.3-SNAPSHOT-09496217` to use
 a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/opentelekomcloud/terraform-provider-opentelekomcloud
-
-
-
-98
 
