@@ -1,4 +1,4 @@
-# 100 Kleine Helferlein
+# 102 Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -752,6 +752,21 @@ kubectl delete pod --grace-period=0 --force broken_pod
 
 ```
 kubectl get clusterrolebindings -o json | jq -r '.items[] | select( .subjects // [] | .[] | [.kind,.namespace,.name] == ["ServiceAccount","cert-manager","cert-manager"]) | .metadata.name'
+```
+
+### Which deprecated API are in use
+
+using Kube No Trouble (kubent)
+
+```
+curl -L https://git.io/install-kubent | sh -
+kubent -o json | jq -r '.[] | select (."ApiVersion"| contains("networking"))'
+```
+
+### Who requested cpu/memory resources in the cluster
+
+```
+kubectl get pods -A -o json | jq -r '.items[] |"\(.spec.containers[].resources.requests.cpu);\(.spec.containers[].resources.requests.memory);\(.metadata.namespace);\(.metadata.name);"'| sort -nr | grep -v "^null"
 ```
 
 ## Terraform
