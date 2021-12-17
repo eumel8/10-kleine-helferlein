@@ -1,4 +1,4 @@
-# 102 Kleine Helferlein
+# 107 Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -50,7 +50,7 @@ done
 # dpkg -S /path/to/file
 ```
 
-####  Welche Dateien sind in einem installierten Paket:
+#### Welche Dateien sind in einem installierten Paket:
 
 ```
 # rpm -qil paket-name
@@ -85,13 +85,13 @@ Manchmal gibt es haessliche Zeilenverschiebungen. Dagegen hilft ein
 PS4='Line ${LINENO}: ' bash -x script
 ```
 
-##### git-crypt list current key
+#### git-crypt list current key
 
 ```
 for key in .git-crypt/keys/default/0/* ; do gpg -k $(echo $(basename $key) | sed -e 's/.gpg//') ; done ;
 ```
 
-##### get gitlab environment variables and convert to shell variables
+#### get gitlab environment variables and convert to shell variables
 
 ```
 curl -sq --header "PRIVATE-TOKEN: <gitlab-api-token>" "https://gitlab.com/api/v4/projects/188/variables" | jq -r '"export " + .[].key + "=" + .[].value'
@@ -132,7 +132,7 @@ CHANGE MASTER TO
 mysql> slave  stop; set global sql_slave_skip_counter=1; slave  start ; show slave status\G
 ```
 
-##### Query-log einschalten:
+#### Query-log einschalten:
 
 ```
 mysql> show global variables like '%general%';
@@ -736,25 +736,25 @@ remove all secrets and restart pods with fresh service account token
 kubectl get pods --namespace cognigy -l "app=prometheus-redis-exporter,release=prometheus-redis-persistent-exporter" -o jsonpath="{.items[0].metadata.name}"
 ```
 
-### Scale down all resources
+#### Scale down all resources
 
 ```
 kubectl -n default scale all --all --replicas=0
 ```
 
-### Force delete PODs in state Terminating
+#### Force delete PODs in state Terminating
 
 ```
 kubectl delete pod --grace-period=0 --force broken_pod
 ```
 
-### Which (Cluster)RoleBindings are associated to a ServiceAccount
+#### Which (Cluster)RoleBindings are associated to a ServiceAccount
 
 ```
 kubectl get clusterrolebindings -o json | jq -r '.items[] | select( .subjects // [] | .[] | [.kind,.namespace,.name] == ["ServiceAccount","cert-manager","cert-manager"]) | .metadata.name'
 ```
 
-### Which deprecated API are in use
+#### Which deprecated API are in use
 
 using Kube No Trouble (kubent)
 
@@ -763,10 +763,16 @@ curl -L https://git.io/install-kubent | sh -
 kubent -o json | jq -r '.[] | select (."ApiVersion"| contains("networking"))'
 ```
 
-### Who requested cpu/memory resources in the cluster
+#### Who requested cpu/memory resources in the cluster
 
 ```
 kubectl get pods -A -o json | jq -r '.items[] |"\(.spec.containers[].resources.requests.cpu);\(.spec.containers[].resources.requests.memory);\(.metadata.namespace);\(.metadata.name);"'| sort -nr | grep -v "^null"
+```
+
+#### Debug Banzaicloud Logging Operator in Rancher
+
+```
+kubectl -n cattle-logging-system exec -it rancher-logging-fluentd-0 -- cat /fluentd/log/out
 ```
 
 ## Terraform
