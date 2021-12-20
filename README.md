@@ -775,9 +775,19 @@ kubectl get pods -A -o json | jq -r '.items[] |"\(.spec.containers[].resources.r
 kubectl -n cattle-logging-system exec -it rancher-logging-fluentd-0 -- cat /fluentd/log/out
 ```
 
+
+#### Replace deprecates kubectl componentstatus
+
+```
+kubectl get clusters.management.cattle.io local -o json | jq  '.status.componentStatuses[] | .name,.conditions[].message'
+```
+```
+curl -s -H "Content-Type: application/json" -H "authorization: Bearer <token>" https://raseed-test.external.otc.telekomcloud.com/k8s/clusters/local/apis/management.cattle.io/v3/clusters/local| jq '.status.componentStatuses[] | .name,.conditions[].message'
+```
+
 ## Terraform
 
-### Use local provider instead remote (or snapshot version)
+#### Use local provider instead remote (or snapshot version)
 
 ```
 cat  ~/.terraformrc
