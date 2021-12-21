@@ -3,9 +3,17 @@
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
 
+[Bash](#bash)
+[MySQL](#mysql)
+[Git](#git)
+[OpenSSL](#openssl)
+[Docker](#docker)
 [Kubernetes](#kubernetes)
+[Rancher](#rancher)
+[Anything Else](#anything)
+[Terraform](#terraform)
 
-## Bash
+## <a name="bash">Bash</a>
 
 #### Finde alle Dateien in einem Verzeichnis und kopiere sie in ein anderes Verzeichnis. Alle Dateieigenschaften bleiben erhalten.
 
@@ -99,7 +107,7 @@ curl -sq --header "PRIVATE-TOKEN: <gitlab-api-token>" "https://gitlab.com/api/v4
 ```
 
 
-## MySQL
+## <a name="mysql">MySQL</a>
 
 #### Lege einen User an, vergebe ein Passwort und bestimmte Rechte
 
@@ -176,7 +184,7 @@ oder
 mysql> SELECT TABLE_ROWS,TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = “mydb”
 ```
 
-## Git
+## <a name="git">Git</a>
 
 #### Git: Eine Datei in 2 Branches vergleichen:
 
@@ -198,7 +206,7 @@ git pull mygithub master
 git push
 ```
 
-## OpenSSL
+## <a name="openssl">OpenSSL</a>
 
 #### Openssl: SSL-Zertifikat anlegen (fuer apache, postfix usw.)
 
@@ -227,7 +235,7 @@ die checksum sollte gleich sein
 nmap --script ssl-enum-ciphers -p 443 cloud.telekom.de
 ```
 
-## Docker
+## <a name="docker">Docker</a>
 
 ### read Docker logs
 
@@ -247,7 +255,7 @@ for i in `docker ps --all |awk '{print $1}'`;do docker rm --force $i;done
 for i in `docker images |awk '{print $3}'`;do docker image rm $i;done
 ```
 
-# OpenStack
+## <a name="openstack">OpenStack</a>
 
 #### unbenutze volumes loeschen
 
@@ -268,7 +276,7 @@ for i in `openstack server list | grep k8s-00 | grep ranchermaster | awk '{print
 openstack floating ip create --floating-ip-address 80.158.7.232 admin_external_net
 ```
 
-## Dies & Das
+## <a name="anything">Anything Else</a>
 
 #### Virtuelle Konsole aufrufen mit virt-viewer
 
@@ -623,7 +631,7 @@ tar xvfz
 kubectl get nodes -o json | jq -r '.items[]| .metadata.labels."topology.kubernetes.io/zone" + " - " + .metadata.labels."kubernetes.io/hostname"' | sort
 ```
 
-### Rancher
+## <a name="rancher">Rancher</a>
 
 #### Reset admin password
 
@@ -792,7 +800,7 @@ curl -s -H "Content-Type: application/json" -H "authorization: Bearer <token>" h
 curl -s -H "Content-Type: application/json" -H "authorization: Bearer xxxxxxxxxxxxxxx"   https://raseed-test.external.otc.telekomcloud.com/v3/clusters/local | jq -c '.certificatesExpiration|to_entries[] | select(.value.expirationDate <= '\"`date -d "+ 1 month" -I`\"') | [.key, .value.expirationDate']
 ```
 
-## Terraform
+## <a name="terraform">Terraform</a>
 
 #### Use local provider instead remote (or snapshot version)
 
