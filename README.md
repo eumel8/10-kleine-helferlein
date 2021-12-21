@@ -3,6 +3,7 @@
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
 
+[Kubernetes](#kubernetes)
 
 ## Bash
 
@@ -313,7 +314,7 @@ journalctl –vacuum-time=3d
 curl https://ipinfo.io/ip
 ```
 
-## Kubernetes
+## <a name="kubernetes">Kubernetes</a>
 
 #### kubectl bash complition
 
