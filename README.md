@@ -1,17 +1,11 @@
 # 110 Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
-Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
+Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein) <a name="top"></a>
 
-[Bash](#bash)
-[MySQL](#mysql)
-[Git](#git)
-[OpenSSL](#openssl)
-[Docker](#docker)
-[Kubernetes](#kubernetes)
-[Rancher](#rancher)
-[Anything Else](#anything)
-[Terraform](#terraform)
+
+[Bash](#bash) | [MySQL](#mysql) | [Git](#git) | [OpenSSL](#openssl) | [Docker](#docker) | [Kubernetes](#kubernetes) | [Rancher](#rancher) | [Terraform](#terraform) | [Anything Else](#anything)
+
 
 ## <a name="bash">Bash</a>
 
@@ -106,6 +100,7 @@ for key in .git-crypt/keys/default/0/* ; do gpg -k $(echo $(basename $key) | sed
 curl -sq --header "PRIVATE-TOKEN: <gitlab-api-token>" "https://gitlab.com/api/v4/projects/188/variables" | jq -r '"export " + .[].key + "=" + .[].value'
 ```
 
+[Top](#top)
 
 ## <a name="mysql">MySQL</a>
 
@@ -184,6 +179,8 @@ oder
 mysql> SELECT TABLE_ROWS,TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = “mydb”
 ```
 
+[Top](#top)
+
 ## <a name="git">Git</a>
 
 #### Git: Eine Datei in 2 Branches vergleichen:
@@ -205,6 +202,8 @@ git remote add mygithub https://github.com/eumel8/ansible-otc
 git pull mygithub master
 git push
 ```
+
+[Top](#top)
 
 ## <a name="openssl">OpenSSL</a>
 
@@ -235,6 +234,8 @@ die checksum sollte gleich sein
 nmap --script ssl-enum-ciphers -p 443 cloud.telekom.de
 ```
 
+[Top](#top)
+
 ## <a name="docker">Docker</a>
 
 ### read Docker logs
@@ -254,6 +255,8 @@ for i in `docker ps --all |awk '{print $1}'`;do docker rm --force $i;done
 ```
 for i in `docker images |awk '{print $3}'`;do docker image rm $i;done
 ```
+
+[Top](#top)
 
 ## <a name="openstack">OpenStack</a>
 
@@ -276,51 +279,7 @@ for i in `openstack server list | grep k8s-00 | grep ranchermaster | awk '{print
 openstack floating ip create --floating-ip-address 80.158.7.232 admin_external_net
 ```
 
-## <a name="anything">Anything Else</a>
-
-#### Virtuelle Konsole aufrufen mit virt-viewer
-
-```
-virt-viewer -c qemu+ssh://root@192.168.0.101/system test
-```
-
-#### ZFS set automatic mountpoints (lxd story)
-
-```
-zfs get mountpoint lxd00/containers/dns
-zfs set mountpoint=/var/lib/lxd/containers/dns.zfs lxd00/containers/dns
-zfs mount lxd00/containers/jump
-cd /var/lib/lxd/containers
-ln -s /var/lib/lxd/containers/dns.zfs dns
-
-used by rollback lxd 2.2 to 2.0
-```
-
-#### teste SMTP Verbindung mit curl
-
-```
-curl -v smtp://out-cloud.mms.t-systems-service.com:25 --mail-from noreply@raseed.external.otc.telekomcloud.com --mail-rcpt f.kloeker@t-online.de --upload-file /etc/os-release
-oder
-openssl s_client -connect securesmtp.t-online.de:465
-```
-
-#### Welche Rechte habe ich im Windows
-
-```
-rundll32.exe keymgr.dll KRShowKeyMgr
-```
-
-#### Linux Logfile Expire
-
-```
-journalctl –vacuum-time=3d
-```
-
-#### Wie ist meine externe IP-Adresse:
-
-```
-curl https://ipinfo.io/ip
-```
+[Top](#top)
 
 ## <a name="kubernetes">Kubernetes</a>
 
@@ -631,6 +590,8 @@ tar xvfz
 kubectl get nodes -o json | jq -r '.items[]| .metadata.labels."topology.kubernetes.io/zone" + " - " + .metadata.labels."kubernetes.io/hostname"' | sort
 ```
 
+[Top](#top)
+
 ## <a name="rancher">Rancher</a>
 
 #### Reset admin password
@@ -800,6 +761,8 @@ curl -s -H "Content-Type: application/json" -H "authorization: Bearer <token>" h
 curl -s -H "Content-Type: application/json" -H "authorization: Bearer xxxxxxxxxxxxxxx"   https://raseed-test.external.otc.telekomcloud.com/v3/clusters/local | jq -c '.certificatesExpiration|to_entries[] | select(.value.expirationDate <= '\"`date -d "+ 1 month" -I`\"') | [.key, .value.expirationDate']
 ```
 
+[Top](#top)
+
 ## <a name="terraform">Terraform</a>
 
 #### Use local provider instead remote (or snapshot version)
@@ -818,4 +781,53 @@ provider_installation {
 
 The plugin location on Linux will be ` ~/.terraform.d/plugin-cache/registry.terraform.io/opentelekomcloud/opentelekomcloud/1.25.3-SNAPSHOT-09496217/linux_amd64/terraform-provider-opentelekomcloud_v1.25.3-SNAPSHOT-09496217` to use
 a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/opentelekomcloud/terraform-provider-opentelekomcloud
+
+
+## <a name="anything">Anything Else</a>
+
+#### Virtuelle Konsole aufrufen mit virt-viewer
+
+```
+virt-viewer -c qemu+ssh://root@192.168.0.101/system test
+```
+
+#### ZFS set automatic mountpoints (lxd story)
+
+```
+zfs get mountpoint lxd00/containers/dns
+zfs set mountpoint=/var/lib/lxd/containers/dns.zfs lxd00/containers/dns
+zfs mount lxd00/containers/jump
+cd /var/lib/lxd/containers
+ln -s /var/lib/lxd/containers/dns.zfs dns
+
+used by rollback lxd 2.2 to 2.0
+```
+
+#### teste SMTP Verbindung mit curl
+
+```
+curl -v smtp://out-cloud.mms.t-systems-service.com:25 --mail-from noreply@raseed.external.otc.telekomcloud.com --mail-rcpt f.kloeker@t-online.de --upload-file /etc/os-release
+oder
+openssl s_client -connect securesmtp.t-online.de:465
+```
+
+#### Welche Rechte habe ich im Windows
+
+```
+rundll32.exe keymgr.dll KRShowKeyMgr
+```
+
+#### Linux Logfile Expire
+
+```
+journalctl –vacuum-time=3d
+```
+
+#### Wie ist meine externe IP-Adresse:
+
+```
+curl https://ipinfo.io/ip
+```
+
+[Top](#top)
 
