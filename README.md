@@ -9,31 +9,31 @@ Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-klei
 
 ## <a name="bash">Bash</a>
 
-#### Finde alle Dateien in einem Verzeichnis und kopiere sie in ein anderes Verzeichnis. Alle Dateieigenschaften bleiben erhalten.
+#### find all files in a directory, copy them in another, and keep all properties.
 
 ```
 find . -depth | cpio -pvdm /new_data
 ```
 
-#### Ersetze einen String durch einen anderen in einer Datei (hier Zeilenendezeichen \r)
+#### replace a string in a file with another (here: linebreak \r)
 
 ```
 perl -p -i -e 's/\r//g' datei
 ```
 
-#### Dekodiere einen base64-String in einer Datei
+#### decode a base64 string in a file
 
 ```
 perl -MMIME::Base64 -0777 -ne 'print decode_base64($_)' datei
 ```
 
-#### Fuehre nacheinander auf vielen Rechnern ein Kommando aus (z.B. "date")
+#### loop within some server and execute command there (here: "date")
 
 ```
 for i in 51 52 53 61 62 63; do ssh root@192.168.0.$i "hostname; date";done
 ```
 
-#### Meine Loop-Devices sind alle.
+#### out of loop devices
 
 ```
 #!/bin/bash
