@@ -3,44 +3,37 @@
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
 
-[Bash](#bash)
-[MySQL](#mysql)
-[Git](#git)
-[OpenSSL](#openssl)
-[Docker](#docker)
-[Kubernetes](#kubernetes)
-[Rancher](#rancher)
-[Anything Else](#anything)
-[Terraform](#terraform)
-[Mac](#Mac)
+
+[Bash](#bash) | [MySQL](#mysql) | [Git](#git) | [OpenSSL](#openssl) | [Docker](#docker) | [Kubernetes](#kubernetes) | [Rancher](#rancher) | [Terraform](#terraform) | [Anything Else](#anything) | [Mac](#Mac)
+
 
 ## <a name="bash">Bash</a>
 
-#### Finde alle Dateien in einem Verzeichnis und kopiere sie in ein anderes Verzeichnis. Alle Dateieigenschaften bleiben erhalten.
+#### find all files in a directory, copy them in another, and keep all properties.
 
 ```
 find . -depth | cpio -pvdm /new_data
 ```
 
-#### Ersetze einen String durch einen anderen in einer Datei (hier Zeilenendezeichen \r)
+#### replace a string in a file with another (here: linebreak \r)
 
 ```
 perl -p -i -e 's/\r//g' datei
 ```
 
-#### Dekodiere einen base64-String in einer Datei
+#### decode a base64 string in a file
 
 ```
 perl -MMIME::Base64 -0777 -ne 'print decode_base64($_)' datei
 ```
 
-#### Fuehre nacheinander auf vielen Rechnern ein Kommando aus (z.B. "date")
+#### loop within some server and execute command there (here: "date")
 
 ```
 for i in 51 52 53 61 62 63; do ssh root@192.168.0.$i "hostname; date";done
 ```
 
-#### Meine Loop-Devices sind alle.
+#### out of loop devices
 
 ```
 #!/bin/bash
@@ -107,6 +100,7 @@ for key in .git-crypt/keys/default/0/* ; do gpg -k $(echo $(basename $key) | sed
 curl -sq --header "PRIVATE-TOKEN: <gitlab-api-token>" "https://gitlab.com/api/v4/projects/188/variables" | jq -r '"export " + .[].key + "=" + .[].value'
 ```
 
+[Top](#top)
 
 ## <a name="mysql">MySQL</a>
 
@@ -185,6 +179,8 @@ oder
 mysql> SELECT TABLE_ROWS,TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = “mydb”
 ```
 
+[Top](#top)
+
 ## <a name="git">Git</a>
 
 #### Git: Eine Datei in 2 Branches vergleichen:
@@ -206,6 +202,8 @@ git remote add mygithub https://github.com/eumel8/ansible-otc
 git pull mygithub master
 git push
 ```
+
+[Top](#top)
 
 ## <a name="openssl">OpenSSL</a>
 
@@ -236,6 +234,8 @@ die checksum sollte gleich sein
 nmap --script ssl-enum-ciphers -p 443 cloud.telekom.de
 ```
 
+[Top](#top)
+
 ## <a name="docker">Docker</a>
 
 ### read Docker logs
@@ -255,6 +255,8 @@ for i in `docker ps --all |awk '{print $1}'`;do docker rm --force $i;done
 ```
 for i in `docker images |awk '{print $3}'`;do docker image rm $i;done
 ```
+
+[Top](#top)
 
 ## <a name="openstack">OpenStack</a>
 
@@ -277,51 +279,7 @@ for i in `openstack server list | grep k8s-00 | grep ranchermaster | awk '{print
 openstack floating ip create --floating-ip-address 80.158.7.232 admin_external_net
 ```
 
-## <a name="anything">Anything Else</a>
-
-#### Virtuelle Konsole aufrufen mit virt-viewer
-
-```
-virt-viewer -c qemu+ssh://root@192.168.0.101/system test
-```
-
-#### ZFS set automatic mountpoints (lxd story)
-
-```
-zfs get mountpoint lxd00/containers/dns
-zfs set mountpoint=/var/lib/lxd/containers/dns.zfs lxd00/containers/dns
-zfs mount lxd00/containers/jump
-cd /var/lib/lxd/containers
-ln -s /var/lib/lxd/containers/dns.zfs dns
-
-used by rollback lxd 2.2 to 2.0
-```
-
-#### teste SMTP Verbindung mit curl
-
-```
-curl -v smtp://out-cloud.mms.t-systems-service.com:25 --mail-from noreply@raseed.external.otc.telekomcloud.com --mail-rcpt f.kloeker@t-online.de --upload-file /etc/os-release
-oder
-openssl s_client -connect securesmtp.t-online.de:465
-```
-
-#### Welche Rechte habe ich im Windows
-
-```
-rundll32.exe keymgr.dll KRShowKeyMgr
-```
-
-#### Linux Logfile Expire
-
-```
-journalctl –vacuum-time=3d
-```
-
-#### Wie ist meine externe IP-Adresse:
-
-```
-curl https://ipinfo.io/ip
-```
+[Top](#top)
 
 ## <a name="kubernetes">Kubernetes</a>
 
@@ -632,6 +590,8 @@ tar xvfz
 kubectl get nodes -o json | jq -r '.items[]| .metadata.labels."topology.kubernetes.io/zone" + " - " + .metadata.labels."kubernetes.io/hostname"' | sort
 ```
 
+[Top](#top)
+
 ## <a name="rancher">Rancher</a>
 
 #### Reset admin password
@@ -801,6 +761,8 @@ curl -s -H "Content-Type: application/json" -H "authorization: Bearer <token>" h
 curl -s -H "Content-Type: application/json" -H "authorization: Bearer xxxxxxxxxxxxxxx"   https://raseed-test.external.otc.telekomcloud.com/v3/clusters/local | jq -c '.certificatesExpiration|to_entries[] | select(.value.expirationDate <= '\"`date -d "+ 1 month" -I`\"') | [.key, .value.expirationDate']
 ```
 
+[Top](#top)
+
 ## <a name="terraform">Terraform</a>
 
 #### Use local provider instead remote (or snapshot version)
@@ -820,6 +782,7 @@ provider_installation {
 The plugin location on Linux will be ` ~/.terraform.d/plugin-cache/registry.terraform.io/opentelekomcloud/opentelekomcloud/1.25.3-SNAPSHOT-09496217/linux_amd64/terraform-provider-opentelekomcloud_v1.25.3-SNAPSHOT-09496217` to use
 a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/opentelekomcloud/terraform-provider-opentelekomcloud
 
+<<<<<<< HEAD
 ## <a name="mac">Mac</a>
 
 #### Can't start unsigned programms in zsh
@@ -827,3 +790,54 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 ```
 sudo spctl --master-disable
 ```
+=======
+
+## <a name="anything">Anything Else</a>
+
+#### Virtuelle Konsole aufrufen mit virt-viewer
+
+```
+virt-viewer -c qemu+ssh://root@192.168.0.101/system test
+```
+
+#### ZFS set automatic mountpoints (lxd story)
+
+```
+zfs get mountpoint lxd00/containers/dns
+zfs set mountpoint=/var/lib/lxd/containers/dns.zfs lxd00/containers/dns
+zfs mount lxd00/containers/jump
+cd /var/lib/lxd/containers
+ln -s /var/lib/lxd/containers/dns.zfs dns
+
+used by rollback lxd 2.2 to 2.0
+```
+
+#### teste SMTP Verbindung mit curl
+
+```
+curl -v smtp://out-cloud.mms.t-systems-service.com:25 --mail-from noreply@raseed.external.otc.telekomcloud.com --mail-rcpt f.kloeker@t-online.de --upload-file /etc/os-release
+oder
+openssl s_client -connect securesmtp.t-online.de:465
+```
+
+#### Welche Rechte habe ich im Windows
+
+```
+rundll32.exe keymgr.dll KRShowKeyMgr
+```
+
+#### Linux Logfile Expire
+
+```
+journalctl –vacuum-time=3d
+```
+
+#### Wie ist meine externe IP-Adresse:
+
+```
+curl https://ipinfo.io/ip
+```
+
+[Top](#top)
+
+>>>>>>> bbb06a048c728482261cf2b1483513137f1ab548
