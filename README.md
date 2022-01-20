@@ -1,4 +1,4 @@
-# 110 Kleine Helferlein
+# 111 Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -12,6 +12,7 @@ Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-klei
 [Rancher](#rancher)
 [Anything Else](#anything)
 [Terraform](#terraform)
+[Mac](#Mac)
 
 ## <a name="bash">Bash</a>
 
@@ -819,3 +820,10 @@ provider_installation {
 The plugin location on Linux will be ` ~/.terraform.d/plugin-cache/registry.terraform.io/opentelekomcloud/opentelekomcloud/1.25.3-SNAPSHOT-09496217/linux_amd64/terraform-provider-opentelekomcloud_v1.25.3-SNAPSHOT-09496217` to use
 a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/opentelekomcloud/terraform-provider-opentelekomcloud
 
+## <a name="mac">Mac</a>
+
+#### Can't start unsigned programms in zsh
+
+```
+sudo spctl --master-disable
+```
