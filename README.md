@@ -1,4 +1,4 @@
-# 111 Kleine Helferlein
+# 112 Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -590,6 +590,56 @@ tar xvfz
 kubectl get nodes -o json | jq -r '.items[]| .metadata.labels."topology.kubernetes.io/zone" + " - " + .metadata.labels."kubernetes.io/hostname"' | sort
 ```
 
+#### K3S Recover cluster failed due the cluster api authentication failure
+https://github.com/k3s-io/k3s/issues/2788
+
+```
+kubectl get secrets -A|grep service-account-token | awk '{print "kubectel -n "$1 " delete secret "$2}'
+kubectl get pods -A| awk '{print "kubectel -n "$1 " delete pod "$2}'
+
+remove all secrets and restart pods with fresh service account token
+```
+
+#### Grab information from K8S resource description
+
+```
+kubectl get pods --namespace cognigy -l "app=prometheus-redis-exporter,release=prometheus-redis-persistent-exporter" -o jsonpath="{.items[0].metadata.name}"
+```
+
+#### Scale down all resources
+
+```
+kubectl -n default scale all --all --replicas=0
+```
+
+#### Force delete PODs in state Terminating
+
+```
+kubectl delete pod --grace-period=0 --force broken_pod
+```
+
+#### Which (Cluster)RoleBindings are associated to a ServiceAccount
+
+```
+kubectl get clusterrolebindings -o json | jq -r '.items[] | select( .subjects // [] | .[] | [.kind,.namespace,.name] == ["ServiceAccount","cert-manager","cert-manager"]) | .metadata.name'
+```
+
+#### Which deprecated API are in use
+
+using Kube No Trouble (kubent)
+
+```
+curl -L https://git.io/install-kubent | sh -
+kubent -o json | jq -r '.[] | select (."ApiVersion"| contains("networking"))'
+```
+
+#### Who requested cpu/memory resources in the cluster
+
+```
+kubectl get pods -A -o json | jq -r '.items[] |"\(.spec.containers[].resources.requests.cpu);\(.spec.containers[].resources.requests.memory);\(.metadata.namespace);\(.metadata.name);"'| sort -nr | grep -v "^null"
+```
+
+
 [Top](#top)
 
 ## <a name="rancher">Rancher</a>
@@ -690,55 +740,6 @@ newer:
 docker run --rm --net=host -v $(docker inspect kubelet --format '{{ range .Mounts }}{{ if eq .Destination "/etc/kubernetes" }}{{ .Source }}{{ end }}{{ end }}')/ssl:/etc/kubernetes/ssl:ro --entrypoint bash $(docker inspect $(docker images -q --filter=label=org.opencontainers.image.source=https://github.com/rancher/hyperkube.git) --format='{{index .RepoTags 0}}' | tail -1) -c 'kubectl --kubeconfig /etc/kubernetes/ssl/kubecfg-kube-node.yaml get configmap -n kube-system full-cluster-state -o json | jq -r .data.\"full-cluster-state\" | jq -r .currentState.certificatesBundle.\"kube-admin\".config | sed -e "/^[[:space:]]*server:/ s_:.*_: \"https://127.0.0.1:6443\"_"' > kubeconfig_admin.yaml
 ```
 
-#### K3S Recover cluster failed due the cluster api authentication failure
-https://github.com/k3s-io/k3s/issues/2788
-
-```
-kubectl get secrets -A|grep service-account-token | awk '{print "kubectel -n "$1 " delete secret "$2}'
-kubectl get pods -A| awk '{print "kubectel -n "$1 " delete pod "$2}'
-
-remove all secrets and restart pods with fresh service account token
-```
-
-#### Grab information from K8S resource description
-
-```
-kubectl get pods --namespace cognigy -l "app=prometheus-redis-exporter,release=prometheus-redis-persistent-exporter" -o jsonpath="{.items[0].metadata.name}"
-```
-
-#### Scale down all resources
-
-```
-kubectl -n default scale all --all --replicas=0
-```
-
-#### Force delete PODs in state Terminating
-
-```
-kubectl delete pod --grace-period=0 --force broken_pod
-```
-
-#### Which (Cluster)RoleBindings are associated to a ServiceAccount
-
-```
-kubectl get clusterrolebindings -o json | jq -r '.items[] | select( .subjects // [] | .[] | [.kind,.namespace,.name] == ["ServiceAccount","cert-manager","cert-manager"]) | .metadata.name'
-```
-
-#### Which deprecated API are in use
-
-using Kube No Trouble (kubent)
-
-```
-curl -L https://git.io/install-kubent | sh -
-kubent -o json | jq -r '.[] | select (."ApiVersion"| contains("networking"))'
-```
-
-#### Who requested cpu/memory resources in the cluster
-
-```
-kubectl get pods -A -o json | jq -r '.items[] |"\(.spec.containers[].resources.requests.cpu);\(.spec.containers[].resources.requests.memory);\(.metadata.namespace);\(.metadata.name);"'| sort -nr | grep -v "^null"
-```
-
 #### Debug Banzaicloud Logging Operator in Rancher
 
 ```
@@ -760,6 +761,14 @@ curl -s -H "Content-Type: application/json" -H "authorization: Bearer <token>" h
 ```
 curl -s -H "Content-Type: application/json" -H "authorization: Bearer xxxxxxxxxxxxxxx"   https://raseed-test.external.otc.telekomcloud.com/v3/clusters/local | jq -c '.certificatesExpiration|to_entries[] | select(.value.expirationDate <= '\"`date -d "+ 1 month" -I`\"') | [.key, .value.expirationDate']
 ```
+#### rancher-webhhok x509: certificate has expired or is not yet valid
+
+```
+kubectl -n cattle-system edit deployments.apps rancher-webhook
+```
+
+downgrade image tag from v0.2.1 to v0.1.1 and back
+
 
 [Top](#top)
 
