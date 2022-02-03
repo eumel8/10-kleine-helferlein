@@ -1,4 +1,4 @@
-# 112 Kleine Helferlein
+# 113 Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
@@ -639,6 +639,11 @@ kubent -o json | jq -r '.[] | select (."ApiVersion"| contains("networking"))'
 kubectl get pods -A -o json | jq -r '.items[] |"\(.spec.containers[].resources.requests.cpu);\(.spec.containers[].resources.requests.memory);\(.metadata.namespace);\(.metadata.name);"'| sort -nr | grep -v "^null"
 ```
 
+#### check if all certificates of application are valid
+
+```
+kubectl get certificates -A -o json | jq -r '.items[] | .status.notAfter + " => " + .metadata.namespace + "/" + .metadata.name' | sort -n
+```
 
 [Top](#top)
 
