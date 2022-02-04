@@ -1,10 +1,10 @@
-# 113 Kleine Helferlein
+# 112 Kleine Helferlein
 
 Manche Shell-Einzeiler braucht man irgendwie immer wieder, egal in welche Tastatur man seine Finger steckt. Es wird Zeit, diese kleinen Helferlein mal aufzulisten.
 Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-kleine-helferlein)
 
 
-[Bash](#bash) | [MySQL](#mysql) | [Git](#git) | [OpenSSL](#openssl) | [Docker](#docker) | [Kubernetes](#kubernetes) | [Rancher](#rancher) | [Terraform](#terraform) | [Anything Else](#anything) | [Mac](#Mac)
+[Bash](#bash) | [MySQL](#mysql) | [Git](#git) | [OpenSSL](#openssl) | [Docker](#docker) | [Kubernetes](#kubernetes) | [Rancher](#rancher) | [Containerd](#containerd) | [Terraform](#terraform) | [Anything Else](#anything) | [Mac](#Mac)
 
 
 ## <a name="bash">Bash</a>
@@ -46,43 +46,43 @@ done
 
 ### rpm/deb cheats:
 
-#### Zu welchem Paket gehoert eine Datei:
+#### To which package owns a file
 
 ```
 # rpm -qif /path/to/file
 # dpkg -S /path/to/file
 ```
 
-#### Welche Dateien sind in einem installierten Paket:
+#### Which files owns by an installed package
 
 ```
 # rpm -qil paket-name
 # dpk -L paket-name
 ```
 
-#### Abhaengigkeiten eines Pakets pruefen:
+#### Check dependencies of a package
 
 ```
 # rpm -qpR ./paket.rpm
 # dpkg -I ./paket.deb
 ```
 
-#### Abhaengigkeiten eines installierten Pakets pruefen:
+#### Dependencies of an installed package
 
 ```
 # rpm -qR paket-name
 # apt-cache depends
 ```
 
-#### Text aus Zwischenablage in vi einfuegen:
+#### copy & paste in vi
 
-Manchmal gibt es haessliche Zeilenverschiebungen. Dagegen hilft ein
+prevent zeilen misch masch
 
 ```
 :set paste
 ```
 
-#### bash script debug mit Zeilennummer
+#### bash script debug with line numbers
 
 ```
 PS4='Line ${LINENO}: ' bash -x script
@@ -104,19 +104,19 @@ curl -sq --header "PRIVATE-TOKEN: <gitlab-api-token>" "https://gitlab.com/api/v4
 
 ## <a name="mysql">MySQL</a>
 
-#### Lege einen User an, vergebe ein Passwort und bestimmte Rechte
+#### Grant user permissions
 
 ```
 GRANT File, Process,suprt,replication client,select on *.* TO  'depl_mon'@'192.168.0.100' identified by 'poddfsdkfskflpr934r1';
 ```
 
-#### Widerufe die Rechte fuer einen Datenbankuser
+#### Revoke user permissions
 
 ```
 REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'hans'@'192.168.100.%'
 ```
 
-#### Replikation mit SQL-Shell einrichten
+#### Setup replication with SQL-Shell
 
 ```
 mysql>
@@ -130,13 +130,13 @@ CHANGE MASTER TO
    MASTER_CONNECT_RETRY=10;
 ```
 
-#### MySQL-Replikation: Ueberspringe einen Fehlercounter (z.B. "Duplicate entry")
+#### MySQL replication: skip a error counter (e.g. "Duplicate entry")
 
 ```
 mysql> slave  stop; set global sql_slave_skip_counter=1; slave  start ; show slave status\G
 ```
 
-#### Query-log einschalten:
+#### Query-log switch on:
 
 ```
 mysql> show global variables like '%general%';
@@ -289,16 +289,16 @@ openstack floating ip create --floating-ip-address 80.158.7.232 admin_external_n
 source  <(kubectl completion bash)
 ```
 
-#### alle pods und servcíces auflisten
+#### list all workload like pods,deployments,services
 
 ```
 kubectl get all --all-namespaces -o wide
 ```
 
-#### tail -f rancher logs
+#### tail -f pod log
 
 ```
-kubectl logs pod/rancher-7bdd99ccd4-dhpcq  -n cattle-system --tail=10 -f
+kubectl -n cattle-system logs pod/rancher-7bdd99ccd4-dhpcq  --tail=10 -f
 ```
 
 #### delete all evicted pods from all namespaces
@@ -320,7 +320,7 @@ kubectl get pods --all-namespaces | grep 'ImagePullBackOff' | awk '{print $2 " -
 kubectl get pods --all-namespaces | grep -E 'ImagePullBackOff|ErrImagePull|Evicted' | awk '{print $2 " --namespace=" $1}' | xargs kubectl delete pod
 ```
 
-#### scale pod
+#### scale up deployment
 
 ```
 kubectl scale --replicas=1 deployment/rancher -n  cattle-system
@@ -335,22 +335,22 @@ kubectl -n cattle-system describe pod rancher-7bdd99ccd4-v9rjm
 #### delete pod
 
 ```
-kubectl delete pod/rancher-7bdd99ccd4-4qgt5 -n cattle-system
+kubectl -n cattle-system delete pod/rancher-7bdd99ccd4-4qgt5 
 ```
 
 #### delete pod in state Terminating
 
 ```
-kubectl delete pod/rancher-7bdd99ccd4-4qgt5 -n cattle-system --force
+kubectl -n cattle-system delete pod/rancher-7bdd99ccd4-4qgt5 --force
 ```
 
-#### check deployments
+#### list deployments
 
 ```
 kubectl get deployments --all-namespaces
 ```
 
-#### check daemonsets
+#### list daemonsets
 
 ```
 kubectl get daemonsets --all-namespaces
@@ -359,19 +359,19 @@ kubectl get daemonsets --all-namespaces
 #### get detailed status of a pod (failure)
 
 ```
-kubectl get pod cattle-node-agent-44xnn -n cattle-system -o json
+kubectl -n cattle-system get pod cattle-node-agent-44xnn -o json
 ```
 
 #### get events
 
 ```
-kubectl get events -n cattle-system
+kubectl -n cattle-system get events
 ```
 
 #### check openstack elb service
 
 ```
-kubectl describe service openstack-lb -n ingress-nginx
+kubectl -n ingress-nginx describe service openstack-lb
 ```
 
 #### get all pod logs
@@ -398,33 +398,16 @@ kubectl get certificates --all-namespaces
 kubectl get challenges --all-namespaces
 ```
 
-#### scale deployments/daemonsets
-
-```
-kubectl scale --replicas=2 deployment demoapp-glusterfs -n default
-```
-
 #### copy files into pods
 
 ```
-kubectl cp demo.html  default/demoapp-glusterfs-66bcdf58d4-bxfbv:/usr/share/nginx/html/demo.html
+kubectl cp demo.html default/demoapp-glusterfs-66bcdf58d4-bxfbv:/usr/share/nginx/html/demo.html
 ```
 
 #### get service endpoints (and describe & edit)
 
 ```
-kubectl get ep heketi -n glusterstorage
-```
-
-#### delete namespace in state Terminating
-
-```
-kubectl get  ns glusterstorage  -o json > gl.json # delete entries in finalizers list
-curl -k -H "Content-Type: application/json" -H "authorization: Bearer xxxx" -X PUT --data-binary @gl.json  https://raseed-test.external.otc.telekomcloud.com/k8s/clusters/c-bsc65/api/v1/namespaces/glusterstorage/finalize
-
-kubectl get namespace "cattle-system" -o json \
-            | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/" \
-            | kubectl replace --raw /api/v1/namespaces/cattle-system/finalize -f -
+kubectl -n glusterstorage get ep heketi
 ```
 
 #### follow all events
@@ -639,10 +622,17 @@ kubent -o json | jq -r '.[] | select (."ApiVersion"| contains("networking"))'
 kubectl get pods -A -o json | jq -r '.items[] |"\(.spec.containers[].resources.requests.cpu);\(.spec.containers[].resources.requests.memory);\(.metadata.namespace);\(.metadata.name);"'| sort -nr | grep -v "^null"
 ```
 
-#### check if all certificates of application are valid
+#### Check if all certificates of application are valid
 
 ```
 kubectl get certificates -A -o json | jq -r '.items[] | .status.notAfter + " => " + .metadata.namespace + "/" + .metadata.name' | sort -n
+```
+
+
+#### Show PODs in state 'Pending'
+
+```
+kubectl get pods --no-headers -A --field-selector=status.phase=Pending
 ```
 
 [Top](#top)
@@ -659,6 +649,17 @@ kubectl -n cattle-system exec -it <rancher-pod> -- reset-password
 
 ```
 kubectl get clusters c-lvjds -o json | jq -r '. | select(.spec.rancherKubernetesEngineConfig.restore.restore==true)'
+```
+
+#### delete namespace in state Terminating (in Rancher)
+
+```
+kubectl get  ns glusterstorage  -o json > gl.json # delete entries in finalizers list
+curl -k -H "Content-Type: application/json" -H "authorization: Bearer xxxx" -X PUT --data-binary @gl.json  https://raseed-test.external.otc.telekomcloud.com/k8s/clusters/c-bsc65/api/v1/namespaces/glusterstorage/finalize
+
+kubectl get namespace "cattle-system" -o json \
+            | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/" \
+            | kubectl replace --raw /api/v1/namespaces/cattle-system/finalize -f -
 ```
 
 #### RKE bad handshake
@@ -681,6 +682,7 @@ kubectl -n c-lvjds edit nodes.management.cattle.io m-a65b8ee3055b
 ```
 kubectl -n cattle-global-data get rkek8ssystemimages 
 ```
+
 #### Node Cleanup
 
 * https://gist.githubusercontent.com/superseb/2cf186726807a012af59a027cb41270d/raw/eaa2d235e7693c2d1c5a2a916349410274bb95a9/cleanup.sh
@@ -693,29 +695,20 @@ remove lb ingress selector io.cattle.field/appId: mcsps-openstack-cloud-controll
 kubectl -n ingress-nginx edit service openstack-lb 
 ```
 
-#### Show PODs in state 'Pending'
+#### Check if cluster certificates are still valid in Rancher
 
 ```
-kubectl get pods --no-headers -A --field-selector=status.phase=Pending
+curl -s -H "Content-Type: application/json" -H "authorization: Bearer xxxxxxxxxxxxxxx"   https://raseed-test.external.otc.telekomcloud.com/v3/clusters/local | jq -c '.certificatesExpiration|to_entries[] | select(.value.expirationDate <= '\"`date -d "+ 1 month" -I`\"') | [.key, .value.expirationDate']
 ```
 
-#### Containterd list containers
+#### rancher-webhhok x509: certificate has expired or is not yet valid
 
 ```
-ctr c list
+kubectl -n cattle-system edit deployments.apps rancher-webhook
 ```
 
-#### Containterd list containers within k3s
+downgrade image tag from v0.2.1 to v0.1.1 and back
 
-```
-k3s crictl ps
-```
-
-#### Containterd list images within k3s
-
-```
-k3s crictl images
-```
 
 #### Check cert validation on K3S cluster
 
@@ -751,29 +744,37 @@ docker run --rm --net=host -v $(docker inspect kubelet --format '{{ range .Mount
 kubectl -n cattle-logging-system exec -it rancher-logging-fluentd-0 -- cat /fluentd/log/out
 ```
 
-
 #### Replace deprecates kubectl componentstatus
 
 ```
 kubectl get clusters.management.cattle.io local -o json | jq  '.status.componentStatuses[] | .name,.conditions[].message'
 ```
+
 ```
 curl -s -H "Content-Type: application/json" -H "authorization: Bearer <token>" https://raseed-test.external.otc.telekomcloud.com/k8s/clusters/local/apis/management.cattle.io/v3/clusters/local| jq '.status.componentStatuses[] | .name,.conditions[].message'
 ```
 
-#### Check if cluster certificates are still valid in Rancher
+[Top](#top)
+
+## <a name="comtainerd">Containerd/K3S</a>
+
+#### Containterd list containers
 
 ```
-curl -s -H "Content-Type: application/json" -H "authorization: Bearer xxxxxxxxxxxxxxx"   https://raseed-test.external.otc.telekomcloud.com/v3/clusters/local | jq -c '.certificatesExpiration|to_entries[] | select(.value.expirationDate <= '\"`date -d "+ 1 month" -I`\"') | [.key, .value.expirationDate']
-```
-#### rancher-webhhok x509: certificate has expired or is not yet valid
-
-```
-kubectl -n cattle-system edit deployments.apps rancher-webhook
+ctr c list
 ```
 
-downgrade image tag from v0.2.1 to v0.1.1 and back
+#### Containterd list containers within k3s
 
+```
+k3s crictl ps
+```
+
+#### Containterd list images within k3s
+
+```
+k3s crictl images
+```
 
 [Top](#top)
 
@@ -796,7 +797,6 @@ provider_installation {
 The plugin location on Linux will be ` ~/.terraform.d/plugin-cache/registry.terraform.io/opentelekomcloud/opentelekomcloud/1.25.3-SNAPSHOT-09496217/linux_amd64/terraform-provider-opentelekomcloud_v1.25.3-SNAPSHOT-09496217` to use
 a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/opentelekomcloud/terraform-provider-opentelekomcloud
 
-<<<<<<< HEAD
 ## <a name="mac">Mac</a>
 
 #### Can't start unsigned programms in zsh
@@ -804,11 +804,10 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 ```
 sudo spctl --master-disable
 ```
-=======
 
 ## <a name="anything">Anything Else</a>
 
-#### Virtuelle Konsole aufrufen mit virt-viewer
+#### Virtual Console with virt-viewer
 
 ```
 virt-viewer -c qemu+ssh://root@192.168.0.101/system test
@@ -826,7 +825,7 @@ ln -s /var/lib/lxd/containers/dns.zfs dns
 used by rollback lxd 2.2 to 2.0
 ```
 
-#### teste SMTP Verbindung mit curl
+#### SMTP connect test with curl
 
 ```
 curl -v smtp://out-cloud.mms.t-systems-service.com:25 --mail-from noreply@raseed.external.otc.telekomcloud.com --mail-rcpt f.kloeker@t-online.de --upload-file /etc/os-release
@@ -834,7 +833,7 @@ oder
 openssl s_client -connect securesmtp.t-online.de:465
 ```
 
-#### Welche Rechte habe ich im Windows
+#### My current permissions in Windows
 
 ```
 rundll32.exe keymgr.dll KRShowKeyMgr
@@ -846,7 +845,7 @@ rundll32.exe keymgr.dll KRShowKeyMgr
 journalctl –vacuum-time=3d
 ```
 
-#### Wie ist meine externe IP-Adresse:
+#### My current Internet ip-address
 
 ```
 curl https://ipinfo.io/ip
@@ -854,4 +853,3 @@ curl https://ipinfo.io/ip
 
 [Top](#top)
 
->>>>>>> bbb06a048c728482261cf2b1483513137f1ab548
