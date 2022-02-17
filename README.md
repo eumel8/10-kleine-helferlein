@@ -1,4 +1,4 @@
-# 112 Kleine Helferlein
+# 113 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -635,6 +635,19 @@ kubectl get certificates -A -o json | jq -r '.items[] | .status.notAfter + " => 
 
 ```
 kubectl get pods --no-headers -A --field-selector=status.phase=Pending
+```
+
+#### Expande Persistant Volume Claim (PVC) with cinder volume expander
+
+```
+# scale down workload
+kubectl -n cms scale --replicas=0 statefulset management-solr-master
+# increase volume size
+kubectl -n cms edit pvc management-solr-master-pv-claim 
+# scale up workload
+kubectl -n cms scale --replicas=0 statefulset management-solr-master
+# show results
+kubectl -n cms describe pvc management-solr-master-pv-claim 
 ```
 
 [Top](#top)
