@@ -1,4 +1,4 @@
-# 113 Kleine Helferlein
+# 114 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -533,6 +533,18 @@ docker rename etcd etcd-old
 # run the output script
 # add addtional etcd nodes
 ```
+
+#### Restore etcd (from file=)
+
+```
+unzip /opt/rke/etcd-snapshots/c-tg2bh-rs-8bggs_2022-03-09T09\:25\:42Z.zip
+mv backup/c-tg2bh-rs-8bggs_2022-03-09T09\:25\:42Z /var/lib/etcd
+docker run --name=etcdrestore --hostname=vm-frank-test-k8s-00-ranchermaster-1 --env=ETCDCTL_API=3 --env=ETCDCTL_ENDPOINTS=https://127.0.0.1:2379 --env=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin --volume=/var/lib/etcd/r3:/var/lib/rancher/etcd/ --network=host --workdir=/ --detach=true mtr.external.otc.telekomcloud.com/rancher/mirrored-coreos-etcd:v3.4.16-rancher1 /usr/local/bin/etcdctl snapshot restore /var/lib/rancher/etcd/c-tg2bh-rs-8bggs_2022-03-09T09\:25\:42Z --initial-advertise-peer-urls=https://10.9.3.92:2380 --initial-cluster-token=etcd-cluster-1 --name=etcd-vm-frank-test-k8s-00-ranchermaster-1 --initial-cluster=etcd-vm-frank-test-k8s-00-ranchermaster-1=https://10.9.3.92:2380 --data-dir=/var/lib/rancher/etcd/data
+mv /var/lib/etc/r3/data/member /var/lib/etc
+```
+
+make the etcd recovery with initial-cluster as above
+
 
 #### Explain Custome Resource Defintions
 
