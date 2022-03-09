@@ -537,7 +537,7 @@ docker rename etcd etcd-old
 # add addtional etcd nodes
 ```
 
-#### Restore etcd (from file=)
+#### Restore etcd [from file](https://etcd.io/docs/v3.4/op-guide/recovery/)
 
 ```
 unzip /opt/rke/etcd-snapshots/c-tg2bh-rs-8bggs_2022-03-09T09\:25\:42Z.zip
