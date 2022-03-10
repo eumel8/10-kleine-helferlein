@@ -1,4 +1,4 @@
-# 114 Kleine Helferlein
+# 115 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -663,6 +663,12 @@ kubectl -n cms edit pvc management-solr-master-pv-claim
 kubectl -n cms scale --replicas=0 statefulset management-solr-master
 # show results
 kubectl -n cms describe pvc management-solr-master-pv-claim 
+```
+
+#### Show taint values on all nodes
+
+```
+kubectl get nodes -o json| jq -r '.items[]| .metadata.name + " - " + .spec.taints[]?.value'
 ```
 
 [Top](#top)
