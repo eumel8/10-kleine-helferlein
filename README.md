@@ -1,4 +1,4 @@
-# 115 Kleine Helferlein
+# 116 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -669,6 +669,12 @@ kubectl -n cms describe pvc management-solr-master-pv-claim
 
 ```
 kubectl get nodes -o json| jq -r '.items[]| .metadata.name + " - " + .spec.taints[]?.value'
+```
+
+#### Update kubectl.kubernetes.io/last-applied-configuration annotation (used by kubent for API deprecation)
+
+```
+kubectl -n mcsps-certs get ingress mcsps-certs -o yaml |kubectl apply -f -
 ```
 
 [Top](#top)
