@@ -1,4 +1,4 @@
-# 116 Kleine Helferlein
+# 117 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -675,6 +675,12 @@ kubectl get nodes -o json| jq -r '.items[]| .metadata.name + " - " + .spec.taint
 
 ```
 kubectl -n mcsps-certs get ingress mcsps-certs -o yaml |kubectl apply -f -
+```
+
+#### Remove finalizer with cli (on batch mode)
+
+```
+kubectl patch volumesnapshot redis-persistent-1622552970 -p '{"metadata":{"finalizers":null}}' --type=merge
 ```
 
 [Top](#top)
