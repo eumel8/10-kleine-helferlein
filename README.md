@@ -527,7 +527,7 @@ kubectl create deployment blog --image eumel8/nginx-none-root
 ####  Restore etcd [in Rancher cluster](https://rancher.com/docs/rancher/v2.x/en/cluster-admin/restoring-etcd/)
 
 ```
-docker run --rm -v /var/run/docker.sock:/var/run/docker.sock assaflavie/runlike etcd
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock mtr.external.otc.telekomcloud.com/mcsps/runlike:latest etcd
 # save output
 docker stop etcd
 docker rename etcd etcd-old
