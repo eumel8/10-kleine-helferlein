@@ -1,4 +1,4 @@
-# 117 Kleine Helferlein
+# 118 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -800,6 +800,13 @@ kubectl get clusters.management.cattle.io local -o json | jq  '.status.component
 
 ```
 curl -s -H "Content-Type: application/json" -H "authorization: Bearer <token>" https://raseed-test.external.otc.telekomcloud.com/k8s/clusters/local/apis/management.cattle.io/v3/clusters/local| jq '.status.componentStatuses[] | .name,.conditions[].message'
+```
+
+#### Search in Rancher audit logs for sso users
+
+
+```
+audit.user.extra.username
 ```
 
 [Top](#top)
