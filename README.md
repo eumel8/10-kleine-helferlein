@@ -1,4 +1,4 @@
-# 118 Kleine Helferlein
+# 119 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -681,6 +681,12 @@ kubectl -n mcsps-certs get ingress mcsps-certs -o yaml |kubectl apply -f -
 
 ```
 kubectl patch volumesnapshot redis-persistent-1622552970 -p '{"metadata":{"finalizers":null}}' --type=merge
+```
+
+#### top consumer per ip-address on ingress-nginx controller logs
+
+```
+for i in `kubectl -n ingress-nginx get pod -lapp=ingress-nginx --no-headers=true| awk '{print $1}'`; do  kubectl -n ingress-nginx logs $i | awk '{print $1}' | grep "^[0-9]*\.";done | sort | uniq -c | sort -nr | head -100
 ```
 
 [Top](#top)
