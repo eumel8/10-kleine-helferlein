@@ -1,4 +1,4 @@
-# 119 Kleine Helferlein
+# 120 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -911,6 +911,13 @@ journalctl –vacuum-time=3d
 ```
 curl https://ipinfo.io/ip
 ```
+
+#### Find dead links on bash (Too many levels of symbolic links)
+
+```
+find -L -xtype l
+```
+
 
 [Top](#top)
 
