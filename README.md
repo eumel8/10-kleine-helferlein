@@ -1,4 +1,4 @@
-# 120 Kleine Helferlein
+# 121 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -282,6 +282,48 @@ for i in `openstack server list | grep k8s-00 | grep ranchermaster | awk '{print
 
 ```
 openstack floating ip create --floating-ip-address 80.158.7.232 admin_external_net
+```
+
+### get a token on scope to query user list
+
+authfile
+
+```
+{
+  "auth": {
+    "identity": {
+      "methods": [
+        "password"
+      ],
+      "password": {
+        "user": {
+          "name": "user",
+          "password": "password",
+          "domain": {
+            "name": "OTC-EU-DE-00000000001000050075"
+          }
+        }
+      }
+    },
+    "scope": {
+      "domain": {
+        "name": "OTC-EU-DE-00000000001000050075"
+      }
+    }
+  }
+} 
+```
+
+get the token
+
+```
+$ export OS_TOKEN=$(curl -i -X POST -H "Content-Type: application/json" -d @auth.txt https://iam.eu-de.otc.t-systems.com/v3/auth/tokens | awk '/X-Subject-Token/ { print $2 }') 
+```
+
+query user list
+
+```
+$ curl -H "X-Auth-Token:$OS_TOKEN" -H 'Content-Type:application/json;charset=utf8' -X GET https://iam.eu-de.otc.t-systems.com/v3/users | jq -r .users[].name
 ```
 
 [Top](#top)
