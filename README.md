@@ -1,4 +1,4 @@
-# 122 Kleine Helferlein
+# 123 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -966,6 +966,12 @@ curl https://ipinfo.io/ip
 
 ```
 find -L -xtype l
+```
+
+#### Github Action - show secrets
+
+```
+echo ${{ secrets.DOCKER_USERNAME }} | sed 's/./& /g'
 ```
 
 
