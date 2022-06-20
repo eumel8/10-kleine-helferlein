@@ -521,10 +521,10 @@ kubectl apply -f debug-shell.yaml
 kubectl get nodes --no-headers | awk '{print $1}' | xargs -I {} sh -c 'echo {}; kubectl describe node {} | grep Allocated -A 5 | grep -ve Event -ve Allocated -ve percent -ve -- ; echo'
 ```
 
-#### list all containers
+#### list all container images
 
 ```
-kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s '[[:space:]]' '\n'
+kubectl get pods --all-namespaces -o jsonpath="{..containers..image}" | tr -s '[[:space:]]' '\n'
 ```
 
 #### where are PVCs connected
