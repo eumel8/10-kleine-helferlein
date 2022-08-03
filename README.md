@@ -1,4 +1,4 @@
-# 123 Kleine Helferlein
+# 125 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -324,6 +324,12 @@ query user list
 
 ```
 $ curl -H "X-Auth-Token:$OS_TOKEN" -H 'Content-Type:application/json;charset=utf8' -X GET https://iam.eu-de.otc.t-systems.com/v3/users | jq -r .users[].name
+```
+
+### on which openstack version runs my VM
+
+```
+dmidecode
 ```
 
 [Top](#top)
@@ -729,6 +735,12 @@ kubectl patch volumesnapshot redis-persistent-1622552970 -p '{"metadata":{"final
 
 ```
 for i in `kubectl -n ingress-nginx get pod -lapp=ingress-nginx --no-headers=true| awk '{print $1}'`; do  kubectl -n ingress-nginx logs $i | awk '{print $1}' | grep "^[0-9]*\.";done | sort | uniq -c | sort -nr | head -100
+```
+
+### which flavor have my nodes
+
+```
+kubectl get nodes -o json|jq -r '.items[]| .metadata.name + " - " + .metadata.labels."node.kubernetes.io/instance-type"' | sort --version-sort
 ```
 
 [Top](#top)
