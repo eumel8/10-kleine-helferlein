@@ -1,4 +1,4 @@
-# 125 Kleine Helferlein
+# 126 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -872,9 +872,16 @@ curl -s -H "Content-Type: application/json" -H "authorization: Bearer <token>" h
 
 #### Search in Rancher audit logs for sso users
 
-
 ```
 audit.user.extra.username
+```
+
+#### Set Rancher in debug mod
+
+```
+kubectl -n cattle-system exec -it rancher-yyyy loglevel --set debug
+or
+kubectl -n cattle-system exec -it rancher-yyyy loglevel --set trace
 ```
 
 [Top](#top)
