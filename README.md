@@ -1,4 +1,4 @@
-# 128 Kleine Helferlein
+# 129 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1005,6 +1005,14 @@ for i in `curl -s -H "Authorization: Bearer xxxxx" "https://mtr.external.otc.tel
 
 ```
 curl https://httpbin.org/post -d "firstname=john&lastname=doe"
+```
+
+#### Nginx Ingress Real-IP
+
+```
+annotations:
+nginx.ingress.kubernetes.io/configuration-snippet: |-
+proxy_set_header X-Original-Forwarded-Host $http_x_forwarded_host; 
 ```
 
 [Top](#top)
