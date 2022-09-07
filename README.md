@@ -1,4 +1,4 @@
-# 129 Kleine Helferlein
+# 130 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -737,10 +737,16 @@ kubectl patch volumesnapshot redis-persistent-1622552970 -p '{"metadata":{"final
 for i in `kubectl -n ingress-nginx get pod -lapp=ingress-nginx --no-headers=true| awk '{print $1}'`; do  kubectl -n ingress-nginx logs $i | awk '{print $1}' | grep "^[0-9]*\.";done | sort | uniq -c | sort -nr | head -100
 ```
 
-### which flavor have my nodes
+#### which flavor have my nodes
 
 ```
 kubectl get nodes -o json|jq -r '.items[]| .metadata.name + " - " + .metadata.labels."node.kubernetes.io/instance-type"' | sort --version-sort
+```
+
+#### copy data from different PODs and different Cluster
+
+```
+kubectl --context=cl01 exec mysql-client-0 -- tar cf - /mysql | kubectl --context=cl02 exec -i mysql-client-0 -- tar xvf - -C /
 ```
 
 [Top](#top)
