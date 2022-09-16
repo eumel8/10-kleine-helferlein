@@ -1,4 +1,4 @@
-# 130 Kleine Helferlein
+# 131 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -939,6 +939,12 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 
 ```
 sudo spctl --master-disable
+```
+
+### Search for apps with network problems
+
+```
+sudo lsof -i -n| grep -i micros| grep -i syn
 ```
 
 ## <a name="anything">Anything Else</a>
