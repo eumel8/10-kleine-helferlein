@@ -890,6 +890,15 @@ or
 kubectl -n cattle-system exec -it rancher-yyyy loglevel --set trace
 ```
 
+#### Websocket Disconnect Error in 2.6.8 UI
+
+In Browser Dev Console, Live Filter Expression
+
+```
+var element = document.getElementsByClassName("growl-container"); while(element[0]) { element[0].parentNode.removeChild(element[0]); }
+```
+
+
 [Top](#top)
 
 ## <a name="comtainerd">Containerd/K3S</a>
