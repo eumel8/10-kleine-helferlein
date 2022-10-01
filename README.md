@@ -1,4 +1,4 @@
-# 131 Kleine Helferlein
+# 132 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -630,6 +630,12 @@ kubectl -n kube-system get deployments -o json | jq -r '"name :",.items[].metada
 wget -qO- https://github.com/FairwindsOps/rbac-lookup/releases/download/v0.7.1/rbac-lookup_0.7.1_Linux_x86_64.tar.gz | tar xfz - rbac-lookup
 ./rbac-lookup database-operator -k serviceaccount -o wide
 tar xvfz  
+```
+
+#### Which permissions have I
+
+```
+kubectl auth can-i 'patch' 'rdss' -n rds3
 ```
 
 #### Which nodes are in which AZ
