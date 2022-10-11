@@ -1,4 +1,4 @@
-# 132 Kleine Helferlein
+# 133 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -753,6 +753,15 @@ kubectl get nodes -o json|jq -r '.items[]| .metadata.name + " - " + .metadata.la
 
 ```
 kubectl --context=cl01 exec mysql-client-0 -- tar cf - /mysql | kubectl --context=cl02 exec -i mysql-client-0 -- tar xvf - -C /
+```
+
+#### Helm keep resources after install
+
+```
+kind: Secret
+metadata:
+  annotations:
+    "helm.sh/resource-policy": keep
 ```
 
 [Top](#top)
