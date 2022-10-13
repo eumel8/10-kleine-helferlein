@@ -1,4 +1,4 @@
-# 133 Kleine Helferlein
+# 134 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -913,6 +913,11 @@ In Browser Dev Console, Live Filter Expression
 var element = document.getElementsByClassName("growl-container"); while(element[0]) { element[0].parentNode.removeChild(element[0]); }
 ```
 
+#### Kubectl raw access
+
+```
+kubectl get --raw '/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/buffer_space_usage_ratio'
+```
 
 [Top](#top)
 
