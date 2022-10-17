@@ -1,4 +1,4 @@
-# 134 Kleine Helferlein
+# 135 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -764,6 +764,12 @@ metadata:
     "helm.sh/resource-policy": keep
 ```
 
+#### Kubectl raw access
+
+```
+kubectl get --raw '/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/buffer_space_usage_ratio'
+```
+
 [Top](#top)
 
 ## <a name="rancher">Rancher</a>
@@ -913,11 +919,12 @@ In Browser Dev Console, Live Filter Expression
 var element = document.getElementsByClassName("growl-container"); while(element[0]) { element[0].parentNode.removeChild(element[0]); }
 ```
 
-#### Kubectl raw access
+#### Reconnect Cattle Cluster agents
 
 ```
-kubectl get --raw '/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/buffer_space_usage_ratio'
+kubectl patch clusters.management.cattle.io <REPLACE_WITH_CLUSTERID> -p '{"status":{"agentImage":"dummy"}}' --type merge
 ```
+
 
 [Top](#top)
 
