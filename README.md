@@ -770,6 +770,12 @@ metadata:
 kubectl get --raw '/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/buffer_space_usage_ratio'
 ```
 
+#### Get users with specific columns
+
+```
+kubectl get users -o=custom-columns=PRINCIPALIDS:.principalIds
+```
+
 [Top](#top)
 
 ## <a name="rancher">Rancher</a>
