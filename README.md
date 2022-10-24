@@ -1,4 +1,4 @@
-# 135 Kleine Helferlein
+# 137 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -931,6 +931,11 @@ var element = document.getElementsByClassName("growl-container"); while(element[
 kubectl patch clusters.management.cattle.io <REPLACE_WITH_CLUSTERID> -p '{"status":{"agentImage":"dummy"}}' --type merge
 ```
 
+#### Which user has many tokens
+
+```
+kubectl get tokens.management.cattle.io -o json | jq -r '.items[].userId' | sort | uniq -c | sort -nr |head -10
+```
 
 [Top](#top)
 
