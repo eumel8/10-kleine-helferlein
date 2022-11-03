@@ -1,4 +1,4 @@
-# 137 Kleine Helferlein
+# 138 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -801,6 +801,13 @@ curl -k -H "Content-Type: application/json" -H "authorization: Bearer xxxx" -X P
 kubectl get namespace "cattle-system" -o json \
             | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/" \
             | kubectl replace --raw /api/v1/namespaces/cattle-system/finalize -f -
+```
+
+#### delete namespace in state Terminating without extra Bearer token
+
+```
+kubectl proxy &
+    curl -k -H "Content-Type: application/yaml" -X PUT --data-binary @tmp.yaml http://127.0.0.1:8001/api/v1/namespaces/delete-me/finalize
 ```
 
 #### RKE bad handshake
