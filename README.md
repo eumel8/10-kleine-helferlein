@@ -808,6 +808,15 @@ kubectl get namespace "cattle-system" -o json \
 ```
 kubectl proxy &
     curl -k -H "Content-Type: application/yaml" -X PUT --data-binary @tmp.yaml http://127.0.0.1:8001/api/v1/namespaces/delete-me/finalize
+kubectl proxy &
+PID=$!
+```
+
+or 
+
+```
+curl -X PUT http://localhost:8001/api/v1/namespaces/delete-me/finalize -H "Content-Type: application/json" --data-binary @ns-without-finalizers.json
+kill $PID
 ```
 
 #### RKE bad handshake
