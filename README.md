@@ -1,4 +1,4 @@
-# 138 Kleine Helferlein
+# 140 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -907,6 +907,21 @@ curl -v -k -H "Authorization: Bearer $TOKEN" https://127.0.0.1:6443/api/v1/names
 
 ```
 kubectl -n cattle-logging-system exec -it rancher-logging-fluentd-0 -- cat /fluentd/log/out
+```
+
+#### Banzeicloud fluentd loglevel
+
+```
+kubectl -n cattle-logging-system edit loggings.logging.banzaicloud.io rancher-logging
+
+fluentd:
+  logLevel: debug
+```
+
+#### Banzeicloud check config
+
+```
+kubectl -n cattle-logging-system get secrets rancher-logging-fluentd-app -o jsonpath="{.data['fluentd\.conf']}" | base64 --decode
 ```
 
 #### Replace deprecates kubectl componentstatus
