@@ -1,4 +1,4 @@
-# 140 Kleine Helferlein
+# 142 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -208,6 +208,11 @@ git pull mygithub master
 git push
 ```
 
+#### nice git log
+
+```
+git log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%an%C(reset)%C(bold yellow)%d%C(reset) %C(dim white)- %s%C(reset)' --all
+```
 [Top](#top)
 
 ## <a name="openssl">OpenSSL</a>
@@ -222,6 +227,13 @@ openssl req -new -x509 -days 730 -nodes -out hostname1.pem -keyout hostname1.pem
 
 ```
 openssl x509 -in eumelnetde.pem -noout -text
+```
+
+#### Encrypt and Decrypt files with a key
+
+```
+openssl enc -aes256 -a -pass pass:$AES_KEY -in values.yaml -out values.yaml.enc
+openssl enc -aes256 -a -d -pass pass:$AES_KEY -in values.yaml.enc -out values.yaml
 ```
 
 #### Überprüfen, ob ein SSL-Zertifikat zum Key passt:
