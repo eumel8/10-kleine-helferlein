@@ -1,4 +1,4 @@
-# 142 Kleine Helferlein
+# 143 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -978,6 +978,12 @@ kubectl patch clusters.management.cattle.io <REPLACE_WITH_CLUSTERID> -p '{"statu
 
 ```
 kubectl get tokens.management.cattle.io -o json | jq -r '.items[].userId' | sort | uniq -c | sort -nr |head -10
+```
+
+#### Which customer I have
+
+```
+kubectl get projects.management.cattle.io -A -o json | jq -r '.items[]| .spec.clusterName + "/" + .spec.displayName' | sort | grep -v Default | grep -v System
 ```
 
 [Top](#top)
