@@ -1,4 +1,4 @@
-# 143 Kleine Helferlein
+# 145 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -786,6 +786,18 @@ kubectl get --raw '/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*
 
 ```
 kubectl get users -o=custom-columns=PRINCIPALIDS:.principalIds
+```
+
+#### Show Secrets with empty Fields
+
+```
+kubectl get secrets -o json -A | jq -r '.items[]| select ( [.type] == ["helm.sh/release.v1"]) | select (.data.release | length) == 0' 
+```
+
+#### Show timestamps of Ingress creation
+
+```
+kubectl get ingress -o json -A | jq -r '.items[]| {time: .metadata.creationTimestamp, namespace: .metadata.namespace,name: .metadata.name}'
 ```
 
 [Top](#top)
