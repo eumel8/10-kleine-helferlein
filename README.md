@@ -1,4 +1,4 @@
-# 145 Kleine Helferlein
+# 146 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -946,6 +946,18 @@ fluentd:
 
 ```
 kubectl -n cattle-logging-system get secrets rancher-logging-fluentd-app -o jsonpath="{.data['fluentd\.conf']}" | base64 --decode
+```
+
+#### Banzeicloud logging flow - ignore unknown fields
+
+```
+  - parser:
+      emit_invalid_record_to_error: true
+      parse:
+        keep_time_key: true
+        type: json
+      remove_key_name_field: true
+      reserve_data: true
 ```
 
 #### Replace deprecates kubectl componentstatus
