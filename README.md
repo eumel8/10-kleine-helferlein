@@ -1,4 +1,4 @@
-# 146 Kleine Helferlein
+# 147 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1145,6 +1145,12 @@ curl https://httpbin.org/post -d "firstname=john&lastname=doe"
 annotations:
 nginx.ingress.kubernetes.io/configuration-snippet: |-
 proxy_set_header X-Original-Forwarded-Host $http_x_forwarded_host; 
+```
+
+#### Ubuntu unmet dependency in packages
+
+```
+sudo apt -o Dpkg::Options::="--force-overwrite" --fix-broken install
 ```
 
 [Top](#top)
