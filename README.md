@@ -1,4 +1,4 @@
-# 147 Kleine Helferlein
+# 148 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1010,6 +1010,22 @@ kubectl get tokens.management.cattle.io -o json | jq -r '.items[].userId' | sort
 kubectl get projects.management.cattle.io -A -o json | jq -r '.items[]| .spec.clusterName + "/" + .spec.displayName' | sort | grep -v Default | grep -v System
 ```
 
+#### Dirty Secrets from Helm installs
+
+#!/bin/bash
+
+```
+helm3_releases=$(kubectl get secrets -A --field-selector type=helm.sh/release.v1 -o=jsonpath='{range .items[*]}{.metadata.namespace}{","}{.metadata.name}{"\n"}{end}')
+
+for release in $helm3_releases; do
+        ns=$(echo $release | cut -f1 -d,)
+        name=$(echo $release | cut -f2 -d,)
+        kubectl get secret -n $ns $name -o jsonpath='{.data.release}' | base64 -d | base64 -d | gunzip  > /dev/null
+        if [[ $? != "0" ]]; then
+               echo "Got a dirty data: $ns--$name"
+        fi
+done
+```
 [Top](#top)
 
 ## <a name="comtainerd">Containerd/K3S</a>
