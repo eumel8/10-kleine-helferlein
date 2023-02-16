@@ -1,4 +1,4 @@
-# 149 Kleine Helferlein
+# 150 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1180,5 +1180,10 @@ proxy_set_header X-Original-Forwarded-Host $http_x_forwarded_host;
 sudo apt -o Dpkg::Options::="--force-overwrite" --fix-broken install
 ```
 
+#### Prometheus top metrics
+
+```
+topk(20, count by (__name__)({__name__=~'.+'}))
+```
 [Top](#top)
 
