@@ -1,4 +1,4 @@
-# 148 Kleine Helferlein
+# 149 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1025,6 +1025,12 @@ for release in $helm3_releases; do
                echo "Got a dirty data: $ns--$name"
         fi
 done
+```
+
+#### Generate temporary token
+
+```
+curl -s -X POST https://caas-portal-test.telekom.de/v3/tokens -H "Authorization: Bearer kubeconfig-u-xxx" -H "Content-Type: application/json" -d '{"type":"token","metadata":{},"description":"test delete after 5 minutes","clusterId":"c-fxzb9","ttl":300000}' | jq -r .
 ```
 [Top](#top)
 
