@@ -1032,6 +1032,11 @@ done
 ```
 curl -s -X POST https://caas-portal-test.telekom.de/v3/tokens -H "Authorization: Bearer kubeconfig-u-xxx" -H "Content-Type: application/json" -d '{"type":"token","metadata":{},"description":"test delete after 5 minutes","clusterId":"c-fxzb9","ttl":300000}' | jq -r .
 ```
+
+```
+curl -s -X POST https://caas-portal-test.telekom.de/v3/tokens -H "Authorization: Bearer kubeconfig-u-xxxxx" -H "Content-Type: application/json" -d '{"type":"token","metadata":{},"description":"test delete after 5 minutes","clusterId":"c-fxzb9","ttl":300000}' | jq -r '"apiVersion: v1\nkind: Config:\nclusters:\n- name: \"t02\"\n  user:\n    token: "+.token+"contexts:\n- name: \"t02\"\n  context:\n    user: \"t02\"    cluster: \"t02\"current-context: \"t02\"\n"'
+```
+
 [Top](#top)
 
 ## <a name="comtainerd">Containerd/K3S</a>
