@@ -800,6 +800,14 @@ kubectl get secrets -o json -A | jq -r '.items[]| select ( [.type] == ["helm.sh/
 kubectl get ingress -o json -A | jq -r '.items[]| {time: .metadata.creationTimestamp, namespace: .metadata.namespace,name: .metadata.name}'
 ```
 
+#### Kubectl in Windows Powershell
+
+```
+# download with browser https://dl.k8s.io/release/v1.26.0/bin/windows/amd64/kubectl.exe
+$Env:KUBECONFIG="kube-config.yml"
+ .\kubectl.exe get nodes  
+```
+
 [Top](#top)
 
 ## <a name="rancher">Rancher</a>
