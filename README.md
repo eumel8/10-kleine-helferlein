@@ -1,4 +1,4 @@
-# 150 Kleine Helferlein
+# 151 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1193,5 +1193,13 @@ sudo apt -o Dpkg::Options::="--force-overwrite" --fix-broken install
 ```
 topk(20, count by (__name__)({__name__=~'.+'}))
 ```
+
+#### Prometheus API Query
+
+```
+curl -v 'http://10.42.41.246:9090/api/v1/query?query=container_cpu_usage_seconds_total'
+```
+
+
 [Top](#top)
 
