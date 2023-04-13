@@ -1,4 +1,4 @@
-# 154 Kleine Helferlein
+# 155 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1216,6 +1216,12 @@ kubectl get helmcharts -n cattle-monitoring-system --watch -o=jsonpath="{.metada
 
 ```
 kubectl get helmreleases -n cattle-monitoring-system --watch -o=jsonpath="{.metadata.name}    {.status}"
+```
+
+#### Get all Helmreleases
+
+```
+kubectl -n cattle-monitoring-system get helmreleases.helm.cattle.io 
 ```
 
 [Top](#top)
