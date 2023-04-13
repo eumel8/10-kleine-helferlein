@@ -1,4 +1,4 @@
-# 151 Kleine Helferlein
+# 154 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1200,6 +1200,23 @@ topk(20, count by (__name__)({__name__=~'.+'}))
 curl -v 'http://10.42.41.246:9090/api/v1/query?query=container_cpu_usage_seconds_total'
 ```
 
+#### Status of Helmchart resources
+
+```
+kubectl describe helmcharts,helmreleases -n cattle-monitoring-system -l helm.cattle.io/projectId=p-9krzc
+```
+
+#### Watch Events for Helmcharts
+
+```
+kubectl get helmcharts -n cattle-monitoring-system --watch -o=jsonpath="{.metadata.name}    {.status}"
+```
+
+#### Watch Events for Helmreleases
+
+```
+kubectl get helmreleases -n cattle-monitoring-system --watch -o=jsonpath="{.metadata.name}    {.status}"
+```
 
 [Top](#top)
 
