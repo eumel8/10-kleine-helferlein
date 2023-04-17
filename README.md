@@ -1,4 +1,4 @@
-# 155 Kleine Helferlein
+# 156 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1198,6 +1198,14 @@ topk(20, count by (__name__)({__name__=~'.+'}))
 
 ```
 curl -v 'http://10.42.41.246:9090/api/v1/query?query=container_cpu_usage_seconds_total'
+```
+
+#### Prometheus federate endpoint query
+
+```
+export TOKEN=`cat /var/run/secrets/kubernetes.io/serviceaccount/token`
+curl -v -X GET -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" http://prometheus-operated.cattle-prometheus:9090/federate?
+match[]=%7B__name__=~%22.%2B%22%7D
 ```
 
 #### Status of Helmchart resources
