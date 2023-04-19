@@ -1,4 +1,4 @@
-# 156 Kleine Helferlein
+# 157 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -806,6 +806,12 @@ kubectl get ingress -o json -A | jq -r '.items[]| {time: .metadata.creationTimes
 # download with browser https://dl.k8s.io/release/v1.26.0/bin/windows/amd64/kubectl.exe
 $Env:KUBECONFIG="kube-config.yml"
  .\kubectl.exe get nodes  
+```
+
+#### Get ServiceAccount token content
+
+```
+kubectl -n cattle-prometheus-p-kjbkq get secrets project-monitoring-token-fw4zr -o jsonpath='{.data.token}' | base64 --decode
 ```
 
 [Top](#top)
