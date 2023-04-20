@@ -1,4 +1,4 @@
-# 157 Kleine Helferlein
+# 159 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1237,6 +1237,19 @@ kubectl get helmreleases -n cattle-monitoring-system --watch -o=jsonpath="{.meta
 ```
 kubectl -n cattle-monitoring-system get helmreleases.helm.cattle.io 
 ```
+
+#### Prometheus defensive 1
+
+```
+sum by(username, resource)(rate(apiserver_request_total{resource=~"secrets|configmaps",code=~"401|403"}[5m]))
+```
+
+#### Prometheus defensive 2
+
+```
+rate(apiserver_request_total{verb=~"CREATE|UPDATE|PATCH|DELETE",scope=~"cluster"}[5m])
+```
+
 
 [Top](#top)
 
