@@ -1,4 +1,4 @@
-# 159 Kleine Helferlein
+# 160 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -812,6 +812,12 @@ $Env:KUBECONFIG="kube-config.yml"
 
 ```
 kubectl -n cattle-prometheus-p-kjbkq get secrets project-monitoring-token-fw4zr -o jsonpath='{.data.token}' | base64 --decode
+```
+
+#### Copy files from POD with kubectl without tar
+
+```
+kubectl -n prod exec -it deployment-7459dbbbc6-2tptq -- cat /config/values.yaml > values.yaml
 ```
 
 [Top](#top)
