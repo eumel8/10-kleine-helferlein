@@ -1,4 +1,4 @@
-# 160 Kleine Helferlein
+# 162 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -818,6 +818,18 @@ kubectl -n cattle-prometheus-p-kjbkq get secrets project-monitoring-token-fw4zr 
 
 ```
 kubectl -n prod exec -it deployment-7459dbbbc6-2tptq -- cat /config/values.yaml > values.yaml
+```
+
+#### kubectl which pods have emptyDir volume with memory medium
+
+```
+kubectl get pods -A -o=json | jq -c '.items[] | {kubectln: .metadata.namespace, deletepod: .metadata.name, volumes:.spec.volumes[]?.emptyDir |select( has ("medium")).Memory }'
+```
+
+### kubectl loop to grep in a pod file
+
+```
+for i in `kubectl -n kube-system get pods | grep mcsps-agent |awk '{print $1}'`; do kubectl -n kube-system exec -it $i -- bash -c 'grep "no space" /node/var/log/syslog';echo $i;done
 ```
 
 [Top](#top)
