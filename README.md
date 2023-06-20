@@ -1,4 +1,4 @@
-# 162 Kleine Helferlein
+# 163 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1268,6 +1268,13 @@ sum by(username, resource)(rate(apiserver_request_total{resource=~"secrets|confi
 rate(apiserver_request_total{verb=~"CREATE|UPDATE|PATCH|DELETE",scope=~"cluster"}[5m])
 ```
 
+#### Ubuntu Kernel Pinning
+
+```
+apt-get update
+apt install -y linux-image-4.15.0-65-generic
+apt-mark hold linux-image-generic linux-headers-generic linux-image-4.15.0-65-generic   
+```
 
 [Top](#top)
 
