@@ -1,4 +1,4 @@
-# 163 Kleine Helferlein
+# 165 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -271,6 +271,19 @@ for i in `docker ps --all |awk '{print $1}'`;do docker rm --force $i;done
 
 ```
 for i in `docker images |awk '{print $3}'`;do docker image rm $i;done
+```
+
+### which overlay id belongs to which container
+
+```
+for container in $(docker ps --all --quiet --format '{{ .Names }}'); do     echo "$(docker inspect $container --format '{{.GraphDriver.Data.MergedDir }}' | \
+      grep -Po '^.+?(?=/merged)'  ) = $container"; done
+```
+
+### overlay mounts, which have the most ones
+
+```
+cat /etc/mtab |awk '{print $1}' | sort | uniq -c | sort -n
 ```
 
 [Top](#top)
