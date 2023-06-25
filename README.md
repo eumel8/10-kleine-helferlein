@@ -278,6 +278,8 @@ for i in `docker images |awk '{print $3}'`;do docker image rm $i;done
 ```
 for container in $(docker ps --all --quiet --format '{{ .Names }}'); do     echo "$(docker inspect $container --format '{{.GraphDriver.Data.MergedDir }}' | \
       grep -Po '^.+?(?=/merged)'  ) = $container"; done
+
+cat /etc/mtab | grep "^overlay"| awk -F/ '{print $6}'| sort | uniq -c | sort -nr
 ```
 
 ### overlay mounts, which have the most ones
