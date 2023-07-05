@@ -1,4 +1,4 @@
-# 165 Kleine Helferlein
+# 169 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -9,7 +9,7 @@ Weiterführung der [Blog-Seite](https://blog.eumelnet.de/blogs/blog8.php/10-klei
 Schönere Ansicht mit [Github Pages](https://eumel8.github.io/10-kleine-helferlein/)
 
 
-[Bash](#bash) | [MySQL](#mysql) | [Git](#git) | [OpenSSL](#openssl) | [Docker](#docker) | [Kubernetes](#kubernetes) | [Rancher](#rancher) | [Containerd](#containerd) | [Terraform](#terraform) | [Anything Else](#anything) | [Mac](#Mac)
+[Bash](#bash) | [MySQL](#mysql) | [Git](#git) | [OpenSSL](#openssl) | [Docker](#docker) | [Kubernetes](#kubernetes) | [Rancher](#rancher) | [Containerd](#containerd) | [Terraform](#terraform) | [Helm](#helm) | [Anything Else](#anything) | [Mac](#Mac)
 
 
 ## <a name="bash">Bash</a>
@@ -255,7 +255,7 @@ nmap --script ssl-enum-ciphers -p 443 cloud.telekom.de
 
 ## <a name="docker">Docker</a>
 
-### read Docker logs
+#### read Docker logs
 
 ```
 docker logs kubelet 2>&1| less
@@ -273,7 +273,7 @@ for i in `docker ps --all |awk '{print $1}'`;do docker rm --force $i;done
 for i in `docker images |awk '{print $3}'`;do docker image rm $i;done
 ```
 
-### which overlay id belongs to which container
+#### which overlay id belongs to which container
 
 ```
 for container in $(docker ps --all --quiet --format '{{ .Names }}'); do     echo "$(docker inspect $container --format '{{.GraphDriver.Data.MergedDir }}' | \
@@ -282,7 +282,7 @@ for container in $(docker ps --all --quiet --format '{{ .Names }}'); do     echo
 cat /etc/mtab | grep "^overlay"| awk -F/ '{print $6}'| sort | uniq -c | sort -nr
 ```
 
-### overlay mounts, which have the most ones
+#### overlay mounts, which have the most ones
 
 ```
 cat /etc/mtab |awk '{print $1}' | sort | uniq -c | sort -n
@@ -305,13 +305,13 @@ for i in `openstack volume list --status available -f value| awk '{print $1}'`;d
 for i in `openstack server list | grep k8s-00 | grep ranchermaster | awk '{print $2}'`;do openstack server delete $i;done
 ```
 
-### create floating ip with fixed ip
+#### create floating ip with fixed ip
 
 ```
 openstack floating ip create --floating-ip-address 80.158.7.232 admin_external_net
 ```
 
-### get a token on scope to query user list
+#### get a token on scope to query user list
 
 authfile
 
@@ -353,7 +353,7 @@ query user list
 $ curl -H "X-Auth-Token:$OS_TOKEN" -H 'Content-Type:application/json;charset=utf8' -X GET https://iam.eu-de.otc.t-systems.com/v3/users | jq -r .users[].name
 ```
 
-### on which openstack version runs my VM
+#### on which openstack version runs my VM
 
 ```
 dmidecode
@@ -841,10 +841,23 @@ kubectl -n prod exec -it deployment-7459dbbbc6-2tptq -- cat /config/values.yaml 
 kubectl get pods -A -o=json | jq -c '.items[] | {kubectln: .metadata.namespace, deletepod: .metadata.name, volumes:.spec.volumes[]?.emptyDir |select( has ("medium")).Memory }'
 ```
 
-### kubectl loop to grep in a pod file
+#### kubectl loop to grep in a pod file
 
 ```
 for i in `kubectl -n kube-system get pods | grep mcsps-agent |awk '{print $1}'`; do kubectl -n kube-system exec -it $i -- bash -c 'grep "no space" /node/var/log/syslog';echo $i;done
+```
+
+[Top](#top)
+
+## <a name="helm">Helm</a>
+
+#### Delete Helm deployment with deprecated API 
+
+```
+PATCH_DATA=$(kubectl -n test get secrets sh.helm.release.v1.my-app-test.v1 -o json | jq .data.release -r | base64 -d | base64 -d | gunzip | sed 's|networking.k8s.io/v1beta1|networking.k8s.io/v1|' | gzip -c | base64 | base64)
+kubectl -n fd-test patch secret sh.helm.release.v1.my-app-test.v1 --type='json' -p="[{\"op\":\"replace\",\"path\":\"/data/release\",\"value\":\"$PATCH_DATA\"}]"
+helm -n test delete my-app-test
+release "my-app-test" uninstalled
 ```
 
 [Top](#top)
