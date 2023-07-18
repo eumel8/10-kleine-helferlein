@@ -1,4 +1,4 @@
-# 169 Kleine Helferlein
+# 170 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -901,6 +901,13 @@ or
 ```
 curl -X PUT http://localhost:8001/api/v1/namespaces/delete-me/finalize -H "Content-Type: application/json" --data-binary @ns-without-finalizers.json
 kill $PID
+```
+
+#### delete resources without controller anymore
+
+```
+kubectl -n diagnostic patch projectalertgroups.management.cattle.io projectalert-workload-alert -p '{"metadata":{"finalizers":null}}' --type=merge
+kubectl -n diagnostic delete projectalertgroups.management.cattle.io projectalert-workload-alert
 ```
 
 #### RKE bad handshake
