@@ -1,4 +1,4 @@
-# 170 Kleine Helferlein
+# 171 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -845,6 +845,12 @@ kubectl get pods -A -o=json | jq -c '.items[] | {kubectln: .metadata.namespace, 
 
 ```
 for i in `kubectl -n kube-system get pods | grep mcsps-agent |awk '{print $1}'`; do kubectl -n kube-system exec -it $i -- bash -c 'grep "no space" /node/var/log/syslog';echo $i;done
+```
+
+#### kubectl replace a job
+
+```
+kubectl get job "your-job" -o json | kubectl replace --force -f -
 ```
 
 [Top](#top)
