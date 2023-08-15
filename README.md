@@ -1,4 +1,4 @@
-# 171 Kleine Helferlein
+# 172 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -213,6 +213,15 @@ git push
 ```
 git log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%an%C(reset)%C(bold yellow)%d%C(reset) %C(dim white)- %s%C(reset)' --all
 ```
+
+#### re-sign commits
+
+```
+git rebase HEAD~5 --signoff
+git push --force-with-lease origin fix/configcheck
+```
+
+
 [Top](#top)
 
 ## <a name="openssl">OpenSSL</a>
