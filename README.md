@@ -1,4 +1,4 @@
-# 172 Kleine Helferlein
+# 173 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1117,6 +1117,19 @@ curl -s -X POST https://caas-portal-test.telekom.de/v3/tokens -H "Authorization:
 
 ```
 curl -s -X POST https://caas-portal-test.telekom.de/v3/tokens -H "Authorization: Bearer kubeconfig-u-xxxxx" -H "Content-Type: application/json" -d '{"type":"token","metadata":{},"description":"test delete after 5 minutes","clusterId":"c-fxzb9","ttl":300000}' | jq -r '"apiVersion: v1\nkind: Config:\nclusters:\n- name: \"t02\"\n  user:\n    token: "+.token+"contexts:\n- name: \"t02\"\n  context:\n    user: \"t02\"    cluster: \"t02\"current-context: \"t02\"\n"'
+```
+
+#### Which Goroutines handle errors
+
+```
+while true; do
+    for pod in $(kubectl get pods -n cattle-system --no-headers -l app=rancher | cut -d ' ' -f1); do
+      kubectl exec -n cattle-system $pod -- curl -s http://localhost:6060/debug/pprof/goroutine -o goroutine
+      kubectl cp cattle-system/${pod}:goroutine ./goroutine
+      go tool pprof -top -cum ./goroutine | grep returnErr
+    done
+    sleep 3
+done
 ```
 
 [Top](#top)
