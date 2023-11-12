@@ -1130,6 +1130,12 @@ while true; do
     done
     sleep 3
 done
+
+other queries for other services:
+
+- go tool pprof -top http://127.0.0.1:8080/debug/pprof/heap
+- go tool pprof -top http://127.0.0.1:8080/debug/pprof/allocs
+
 ```
 
 [Top](#top)
