@@ -1,4 +1,4 @@
-# 174 Kleine Helferlein
+# 176 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -221,6 +221,13 @@ git rebase HEAD~5 --signoff
 git push --force-with-lease origin fix/configcheck
 ```
 
+#### work with http(s) git service
+
+create a file $HOME/.netrc with login credentials/token:
+
+```
+machine gitlab.devops.telekom.de login oauth2 password glpat-xxxxx
+```
 
 [Top](#top)
 
@@ -861,6 +868,12 @@ for i in `kubectl -n kube-system get pods | grep mcsps-agent |awk '{print $1}'`;
 ```
 kubectl get job "your-job" -o json | kubectl replace --force -f -
 ```
+
+#### kubectl show deployment history and diff
+
+```
+diff <(kubectl -n lab rollout history deployment db-deployment --revision=34) <(kubectl -n lab rollout history deployment db-deployment --revision=33)
+``` 
 
 [Top](#top)
 
