@@ -1,4 +1,4 @@
-# 176 Kleine Helferlein
+# 177 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -874,6 +874,11 @@ kubectl get job "your-job" -o json | kubectl replace --force -f -
 ```
 diff <(kubectl -n lab rollout history deployment db-deployment --revision=34) <(kubectl -n lab rollout history deployment db-deployment --revision=33)
 ``` 
+
+#### kubectl cp alternative
+
+```
+tar -cf - vcluster-backup | kubectl -n kunde2 exec --stdin kunde2-vcluster-0 -- sh -c "cat > /tmp/vcluster-backup.tar"```
 
 [Top](#top)
 
