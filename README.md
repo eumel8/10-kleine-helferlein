@@ -1,4 +1,4 @@
-# 177 Kleine Helferlein
+# 178 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1365,6 +1365,16 @@ rate(apiserver_request_total{verb=~"CREATE|UPDATE|PATCH|DELETE",scope=~"cluster"
 apt-get update
 apt install -y linux-image-4.15.0-65-generic
 apt-mark hold linux-image-generic linux-headers-generic linux-image-4.15.0-65-generic   
+```
+
+#### Create a GCP Cluster with Cloud Shell
+
+```
+export my_region=us-east1
+export my_cluster=autopilot-cluster-1
+gcloud container clusters create-auto $my_cluster --region $my_region
+gcloud container clusters get-credentials $my_cluster --region $my_region
+kubectl get nodes
 ```
 
 [Top](#top)
