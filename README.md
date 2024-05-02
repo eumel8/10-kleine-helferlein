@@ -1,4 +1,4 @@
-# 178 Kleine Helferlein
+# 179 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -891,6 +891,12 @@ PATCH_DATA=$(kubectl -n test get secrets sh.helm.release.v1.my-app-test.v1 -o js
 kubectl -n fd-test patch secret sh.helm.release.v1.my-app-test.v1 --type='json' -p="[{\"op\":\"replace\",\"path\":\"/data/release\",\"value\":\"$PATCH_DATA\"}]"
 helm -n test delete my-app-test
 release "my-app-test" uninstalled
+```
+
+#### Curl some service/pod endpoints with kubectl
+
+```
+curl -ks https://`kubectl get svc frontend -o=jsonpath="{.status.loadBalancer.ingress[0].ip}"`/version
 ```
 
 [Top](#top)
