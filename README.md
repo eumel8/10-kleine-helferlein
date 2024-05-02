@@ -1,4 +1,4 @@
-# 179 Kleine Helferlein
+# 180 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1381,6 +1381,22 @@ export my_cluster=autopilot-cluster-1
 gcloud container clusters create-auto $my_cluster --region $my_region
 gcloud container clusters get-credentials $my_cluster --region $my_region
 kubectl get nodes
+```
+
+or
+
+```
+gcloud container clusters create bootcamp \
+  --machine-type e2-small \
+  --num-nodes 3 \
+  --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw"
+```
+
+#### Copy stuff in GCP
+
+```
+gsutil -m cp -r gs://spls/gsp053/orchestrate-with-kubernetes .
+cd orchestrate-with-kubernetes/kubernetes
 ```
 
 [Top](#top)
