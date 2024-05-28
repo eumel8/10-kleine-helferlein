@@ -1,4 +1,4 @@
-# 181 Kleine Helferlein
+# 183 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -899,6 +899,18 @@ release "my-app-test" uninstalled
 curl -ks https://`kubectl get svc frontend -o=jsonpath="{.status.loadBalancer.ingress[0].ip}"`/version
 ```
 
+#### PreStop hook of a Pod
+
+```
+lifecycle:
+  preStop:
+    exec:
+      command:
+      - /bin/sh
+      - -c
+      - until [ -f /opt/exit-signals/SIGTERM ]; do sleep 1; done;
+```
+
 [Top](#top)
 
 ## <a name="rancher">Rancher</a>
@@ -1409,6 +1421,23 @@ gcloud logging read \
 ```
 gcloud logging read \
 "logName=projects/$DEVSHELL_PROJECT_ID/logs/cloudaudit.googleapis.com%2Factivity"
+
+#### Launch VM in GCP
+
+```
+  gcloud compute instances create www1 \
+    --zone=us-east1-d \
+    --tags=network-lb-tag \
+    --machine-type=e2-small \
+    --image-family=debian-11 \
+    --image-project=debian-cloud \
+    --metadata=startup-script='#!/bin/bash
+      apt-get update
+      apt-get install apache2 -y
+      service apache2 restart
+      echo "
+<h3>Web Server: www1</h3>" | tee /var/www/html/index.html'
+```
 
 [Top](#top)
 
