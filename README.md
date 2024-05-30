@@ -1,4 +1,4 @@
-# 183 Kleine Helferlein
+# 184 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1279,6 +1279,12 @@ journalctl –vacuum-time=3d
 
 ```
 curl https://ipinfo.io/ip
+```
+
+#### kubeadm create token with join command
+
+```
+kubeadm token create --print-join-command
 ```
 
 #### Find dead links on bash (Too many levels of symbolic links)
