@@ -1286,6 +1286,12 @@ journalctl –vacuum-time=3d
 curl https://ipinfo.io/ip
 ```
 
+#### kubeadm create token with join command
+
+```
+kubeadm token create --print-join-command
+```
+
 #### Find dead links on bash (Too many levels of symbolic links)
 
 ```
