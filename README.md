@@ -1,4 +1,4 @@
-# 184 Kleine Helferlein
+# 185 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1448,6 +1448,12 @@ gcloud logging read \
       service apache2 restart
       echo "
 <h3>Web Server: www1</h3>" | tee /var/www/html/index.html'
+```
+
+### ssh copy id for your ssh key to target system
+
+```
+ssh-copy-id -i ./id_rsa <target-system>
 ```
 
 [Top](#top)
