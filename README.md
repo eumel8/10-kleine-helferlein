@@ -916,6 +916,15 @@ lifecycle:
       - until [ -f /opt/exit-signals/SIGTERM ]; do sleep 1; done;
 ```
 
+#### create a secret from stdin
+
+```
+cat age.agekey |
+kubectl create secret generic sops-age \
+--namespace=flux-system \
+--from-file=age.agekey=/dev/stdin
+```
+
 [Top](#top)
 
 ## <a name="rancher">Rancher</a>
@@ -1056,7 +1065,7 @@ curl -v -k -H "Authorization: Bearer $TOKEN" https://127.0.0.1:6443/api/v1/names
 kubectl -n cattle-logging-system exec -it rancher-logging-fluentd-0 -- cat /fluentd/log/out
 ```
 
-#### Banzeicloud fluentd loglevel
+#### Banzaicloud fluentd loglevel
 
 ```
 kubectl -n cattle-logging-system edit loggings.logging.banzaicloud.io rancher-logging
