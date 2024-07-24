@@ -1,4 +1,4 @@
-# 185 Kleine Helferlein
+# 186 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -227,6 +227,13 @@ create a file $HOME/.netrc with login credentials/token:
 
 ```
 machine gitlab.devops.telekom.de login oauth2 password glpat-xxxxx
+```
+
+#### Git Merge Request + multiline comment
+
+```
+git commit -m "abc: migrate storage" -m "related to JIRA-1234"
+git push -o merge_request.create -o merge_request.title="Migrate storage cluster abc" origin storage_migrate/abc
 ```
 
 [Top](#top)
