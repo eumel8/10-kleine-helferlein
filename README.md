@@ -1158,9 +1158,9 @@ kubectl get projects.management.cattle.io -A -o json | jq -r '.items[]| .spec.cl
 
 #### Dirty Secrets from Helm installs
 
+```
 #!/bin/bash
 
-```
 helm3_releases=$(kubectl get secrets -A --field-selector type=helm.sh/release.v1 -o=jsonpath='{range .items[*]}{.metadata.namespace}{","}{.metadata.name}{"\n"}{end}')
 
 for release in $helm3_releases; do
