@@ -896,7 +896,8 @@ diff <(kubectl -n lab rollout history deployment db-deployment --revision=34) <(
 #### kubectl cp alternative
 
 ```
-tar -cf - vcluster-backup | kubectl -n kunde2 exec --stdin kunde2-vcluster-0 -- sh -c "cat > /tmp/vcluster-backup.tar"```
+tar -cf - vcluster-backup | kubectl -n kunde2 exec --stdin kunde2-vcluster-0 -- sh -c "cat > /tmp/vcluster-backup.tar"
+```
 
 [Top](#top)
 
