@@ -1,4 +1,4 @@
-# 187 Kleine Helferlein
+# 188 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -626,6 +626,12 @@ kubectl config set-context mycontext --cluster mycluster --namespace product-api
 
 ```
 kubectl create deployment blog --image eumel8/nginx-none-root
+```
+
+#### etcd show member
+
+```
+ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key  --endpoints=https://10.23.142.108:2379 member list
 ```
 
 ####  Restore etcd [in Rancher cluster](https://rancher.com/docs/rancher/v2.x/en/cluster-admin/restoring-etcd/)
