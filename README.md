@@ -1,4 +1,4 @@
-# 188 Kleine Helferlein
+# 189 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1483,10 +1483,18 @@ gcloud logging read \
 <h3>Web Server: www1</h3>" | tee /var/www/html/index.html'
 ```
 
-### ssh copy id for your ssh key to target system
+#### ssh copy id for your ssh key to target system
 
 ```
 ssh-copy-id -i ./id_rsa <target-system>
+```
+
+#### how many threads running per process (and which one)
+
+```
+ ps -eo s,user,cmd | grep ^[RD] | sort | uniq -c | sort -nbr | head -20
+      1 R root     ps -eo s,user,cmd
+ ps -eo s,user | grep ^[RD] | sort | uniq -c | sort -nbr | head -20
 ```
 
 [Top](#top)
