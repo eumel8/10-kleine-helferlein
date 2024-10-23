@@ -1,4 +1,4 @@
-# 191 Kleine Helferlein
+# 192 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -278,6 +278,12 @@ die checksum sollte gleich sein
 
 ```
 nmap --script ssl-enum-ciphers -p 443 cloud.telekom.de
+```
+
+#### CA in Kubernetes Secret is valid or show me
+
+```
+kubectl get secrets thanos-mtls-ca -o yaml |yq '.data."ca.crt"'|base64 -d | openssl x509 -in /dev/stdin -text -noout
 ```
 
 [Top](#top)
