@@ -1,4 +1,4 @@
-# 192 Kleine Helferlein
+# 193 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -909,6 +909,12 @@ diff <(kubectl -n lab rollout history deployment db-deployment --revision=34) <(
 
 ```
 tar -cf - vcluster-backup | kubectl -n kunde2 exec --stdin kunde2-vcluster-0 -- sh -c "cat > /tmp/vcluster-backup.tar"
+```
+
+#### kubectl decode secret with dot file name
+
+```
+kubectl get secret <secret-name> -n <namespace> -o jsonpath='{.data.csi-vsphere\.conf}' | base64 --decode
 ```
 
 [Top](#top)
