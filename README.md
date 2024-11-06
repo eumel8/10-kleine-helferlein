@@ -1,4 +1,4 @@
-# 193 Kleine Helferlein
+# 194 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1467,7 +1467,7 @@ gsutil -m cp -r gs://spls/gsp053/orchestrate-with-kubernetes .
 cd orchestrate-with-kubernetes/kubernetes
 ```
 
-#### Show GCP audut log
+#### Show GCP audit log
 
 ```
 gcloud logging read \
@@ -1507,6 +1507,13 @@ ssh-copy-id -i ./id_rsa <target-system>
  ps -eo s,user,cmd | grep ^[RD] | sort | uniq -c | sort -nbr | head -20
       1 R root     ps -eo s,user,cmd
  ps -eo s,user | grep ^[RD] | sort | uniq -c | sort -nbr | head -20
+```
+
+#### see the content of a iso file (as user)
+
+
+```
+isoinfo -i /httpboot/redfish/boot-dd23e88e-036b-4b67-91ed-ce2b31388958.iso -l
 ```
 
 [Top](#top)
