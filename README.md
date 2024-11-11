@@ -1,4 +1,4 @@
-# 194 Kleine Helferlein
+# 195 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -285,6 +285,13 @@ nmap --script ssl-enum-ciphers -p 443 cloud.telekom.de
 ```
 kubectl get secrets thanos-mtls-ca -o yaml |yq '.data."ca.crt"'|base64 -d | openssl x509 -in /dev/stdin -text -noout
 ```
+
+#### Decode a secret with a dot file
+
+```
+ kubectl -n infra get secret infra-fluentbit  -o jsonpath="{.data['fluent-bit\.conf']}" | base64 -d
+```
+
 
 [Top](#top)
 
