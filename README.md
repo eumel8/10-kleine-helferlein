@@ -1,4 +1,4 @@
-# 195 Kleine Helferlein
+# 196 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1521,6 +1521,13 @@ ssh-copy-id -i ./id_rsa <target-system>
 
 ```
 isoinfo -i /httpboot/redfish/boot-dd23e88e-036b-4b67-91ed-ce2b31388958.iso -l
+```
+
+#### Mount a windows mount in WSL
+
+```
+$ sudo mkdir /mnt/d
+$ sudo mount -t drvfs D: /mnt/d
 ```
 
 [Top](#top)
