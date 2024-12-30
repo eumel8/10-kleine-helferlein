@@ -1,4 +1,4 @@
-# 196 Kleine Helferlein
+# 197 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1528,6 +1528,15 @@ isoinfo -i /httpboot/redfish/boot-dd23e88e-036b-4b67-91ed-ce2b31388958.iso -l
 ```
 $ sudo mkdir /mnt/d
 $ sudo mount -t drvfs D: /mnt/d
+```
+
+#### Generate new machine id in LXD container to get a new dhcp ip
+
+```
+lxc exec sqlnode21 -- rm -v /var/lib/dbus/machine-id /etc/machine-id
+lxc exec sqlnode21 -- dbus-uuidgen --ensure
+lxc exec sqlnode21 -- systemd-machine-id-setup
+lxc restart sqlnode21
 ```
 
 [Top](#top)
