@@ -1,4 +1,4 @@
-# 197 Kleine Helferlein
+# 198 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -30,6 +30,12 @@ perl -p -i -e 's/\r//g' datei
 
 ```
 perl -MMIME::Base64 -0777 -ne 'print decode_base64($_)' datei
+```
+
+#### encode a string to base64 without newline
+
+```
+echo -n "password" | base64
 ```
 
 #### loop within some server and execute command there (here: "date")
