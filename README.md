@@ -1,4 +1,4 @@
-# 198 Kleine Helferlein
+# 199 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1534,6 +1534,14 @@ isoinfo -i /httpboot/redfish/boot-dd23e88e-036b-4b67-91ed-ce2b31388958.iso -l
 ```
 $ sudo mkdir /mnt/d
 $ sudo mount -t drvfs D: /mnt/d
+```
+
+#### Portforward WSL2 to host
+
+cmd as Administrator
+
+```
+netsh interface portproxy set v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=8080 connectaddress=127.0.0.1
 ```
 
 #### Generate new machine id in LXD container to get a new dhcp ip
