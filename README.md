@@ -1,4 +1,4 @@
-# 199 Kleine Helferlein
+# 200 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1294,6 +1294,12 @@ sudo spctl --master-disable
 
 ```
 sudo lsof -i -n| grep -i micros| grep -i syn
+```
+
+### Restart Smard Card Reader
+
+```
+killall ctkd
 ```
 
 [Top](#top)
