@@ -1,4 +1,4 @@
-# 200 Kleine Helferlein
+# 201 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -246,6 +246,12 @@ git push -o merge_request.create -o merge_request.remove_source_branch -o merge_
 
 ```
 git push --force-with-lease
+```
+
+#### Search for deleted files in git log
+
+```
+git log --diff-filter=D --summary 
 ```
 
 [Top](#top)
