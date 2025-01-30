@@ -1,4 +1,4 @@
-# 201 Kleine Helferlein
+# 202 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -252,6 +252,13 @@ git push --force-with-lease
 
 ```
 git log --diff-filter=D --summary 
+```
+
+#### Delete all lokal branches
+
+
+```
+for i in `git --no-pager  branch |grep -v main`; do git branch -D $i; done
 ```
 
 [Top](#top)
