@@ -1,4 +1,4 @@
-# 202 Kleine Helferlein
+# 203 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1009,6 +1009,16 @@ kubectl get namespace "cattle-system" -o json \
             | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/" \
             | kubectl replace --raw /api/v1/namespaces/cattle-system/finalize -f -
 ```
+
+#### Access service with Kubectl Proxy
+
+```
+kubectl proxy
+```
+
+Enter URL in browser
+
+http://127.0.0.1:8001/api/v1/namespaces/ollama-chatbot/services/http:ollama-chatbot:80/proxy/
 
 #### delete namespace in state Terminating without extra Bearer token
 
