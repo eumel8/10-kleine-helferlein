@@ -1,4 +1,4 @@
-# 203 Kleine Helferlein
+# 204 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -347,6 +347,15 @@ cat /etc/mtab | grep "^overlay"| awk -F/ '{print $6}'| sort | uniq -c | sort -nr
 
 ```
 cat /etc/mtab |awk '{print $1}' | sort | uniq -c | sort -n
+```
+
+#### Which veth interface belongs to which container
+
+```
+crictl inspect <container-id>
+nsenter -t <container-id> -n ip link show type veth | grep -Po '(?<=eth0@if)\d*'
+ ip a s| grep 75
+75: veth0147df81@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master cni0 state UP group default
 ```
 
 [Top](#top)
