@@ -1,4 +1,4 @@
-# 204 Kleine Helferlein
+# 205 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -259,6 +259,12 @@ git log --diff-filter=D --summary
 
 ```
 for i in `git --no-pager  branch |grep -v main`; do git branch -D $i; done
+```
+
+#### just another score stats in git repo
+
+```
+git log --pretty="%aN" | sort | uniq -c | sort -nr | head -n 10
 ```
 
 [Top](#top)
