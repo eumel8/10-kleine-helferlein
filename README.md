@@ -1,4 +1,4 @@
-# 205 Kleine Helferlein
+# 206 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -266,6 +266,17 @@ for i in `git --no-pager  branch |grep -v main`; do git branch -D $i; done
 ```
 git log --pretty="%aN" | sort | uniq -c | sort -nr | head -n 10
 ```
+
+#### Sort LoC (Lines of Code)
+
+```
+git log --numstat --pretty=format:"%an" | awk '
+  NF==1 {author=$0} 
+  NF==3 {added[author]+=$1; deleted[author]+=$2} 
+  END {for (author in added) print author, added[author], deleted[author]}' | sort -k2 -nr
+``` 
+
+Alternate: `pip insall git-fame`
 
 [Top](#top)
 
