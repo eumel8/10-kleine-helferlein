@@ -1,4 +1,4 @@
-# 206 Kleine Helferlein
+# 207 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1443,6 +1443,12 @@ proxy_set_header X-Original-Forwarded-Host $http_x_forwarded_host;
 
 ```
 sudo apt -o Dpkg::Options::="--force-overwrite" --fix-broken install
+```
+
+#### Prometheus CrashloopbackOff pods
+
+```
+kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff",namespace!~".*-system"} == 1
 ```
 
 #### Prometheus top metrics
