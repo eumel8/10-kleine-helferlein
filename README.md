@@ -1,4 +1,4 @@
-# 207 Kleine Helferlein
+# 208 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -276,7 +276,14 @@ git log --numstat --pretty=format:"%an" | awk '
   END {for (author in added) print author, added[author], deleted[author]}' | sort -k2 -nr
 ``` 
 
-Alternate: `pip insall git-fame`
+Alternate: `pip install git-fame`
+
+#### Delete git tag
+
+```
+git push --delete origin <tag-name>
+git tag -d <tag-name>
+```
 
 [Top](#top)
 
