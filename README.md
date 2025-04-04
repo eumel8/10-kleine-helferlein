@@ -1,4 +1,4 @@
-# 209 Kleine Helferlein
+# 210 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1629,6 +1629,40 @@ cd /mnt/ramdisk
 zcat /boot/ipa-initrd-5.15.0-136-generic.gz | cpio -idmv
 cat rootfs.cxz | unxz |cpio -idmv 
 ``` 
+
+
+#### Linux grub options
+
+make boot menu visible:
+
+/etc/default/grub
+
+```
+#GRUB_TIMEOUT_STYLE=hidden
+GRUB_TIMEOUT=10
+```
+
+/etc/grub.d/40_custom
+
+```
+menuentry "Ubuntu normal" --class ubuntu --class gnu-linux --class gnu --class os {
+    recordfail
+    load_video
+    gfxmode text
+    insmod gzio
+    insmod lzopio
+    insmod part_gpt
+    insmod ext2
+    set root=(hd0,gpt2)
+    linux /vmlinuz root=/dev/mapper/ubuntu--vg-ubuntu--lv ro 
+    initrd /initrd.img
+}
+```
+
+```
+grub-mkconfig
+update-grub
+```
 
 [Top](#top)
 
