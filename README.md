@@ -1,4 +1,4 @@
-# 208 Kleine Helferlein
+# 209 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1620,6 +1620,15 @@ lxc exec sqlnode21 -- dbus-uuidgen --ensure
 lxc exec sqlnode21 -- systemd-machine-id-setup
 lxc restart sqlnode21
 ```
+
+#### unpack ram disk in Ubuntu
+
+```
+mkdir /mnt/ramdisk
+cd /mnt/ramdisk
+zcat /boot/ipa-initrd-5.15.0-136-generic.gz | cpio -idmv
+cat rootfs.cxz | unxz |cpio -idmv 
+``` 
 
 [Top](#top)
 
