@@ -1,4 +1,4 @@
-# 210 Kleine Helferlein
+# 211 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1630,7 +1630,15 @@ zcat /boot/ipa-initrd-5.15.0-136-generic.gz | cpio -idmv
 cat rootfs.cxz | unxz |cpio -idmv 
 ``` 
 
+#### SMB 1.0 activation Windows 11
 
+Admin Powershell
+
+```
+Set-SmbClientConfiguration -RequireSecuritySignature $false
+
+Set-SmbClientConfiguration -EnableInsecureGuestLogons $true 
+```
 #### Linux grub options
 
 make boot menu visible:
