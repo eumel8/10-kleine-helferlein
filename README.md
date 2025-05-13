@@ -1,4 +1,4 @@
-# 211 Kleine Helferlein
+# 212 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1670,6 +1670,14 @@ menuentry "Ubuntu normal" --class ubuntu --class gnu-linux --class gnu --class o
 ```
 grub-mkconfig
 update-grub
+```
+
+#### delete orphaned disc in vCenter
+
+```
+for vol in $(govc disk.ls -ds=/XXX/datastore/XXX-YYY -q capacity.eq=1024 -k -json | jq -r '.objects[] | select(.config.consumerId == null) | .config.id.id'); do
+  echo govc disk.rm -ds=/XXX/datastore/XXX-YYY -k "$vol"
+done
 ```
 
 [Top](#top)
