@@ -1,4 +1,4 @@
-# 212 Kleine Helferlein
+# 213 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1344,6 +1344,12 @@ a snapshot version from https://zuul.otc-service.com/t/eco/project/github.com/op
 
 ```
 sudo spctl --master-disable
+```
+
+#### disable quarantine flag
+
+```
+xattr -d com.apple.quarantine <my-prog>
 ```
 
 ### Search for apps with network problems
