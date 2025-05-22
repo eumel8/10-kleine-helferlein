@@ -1,4 +1,4 @@
-# 213 Kleine Helferlein
+# 214 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1506,6 +1506,30 @@ kubectl get helmreleases -n cattle-monitoring-system --watch -o=jsonpath="{.meta
 
 ```
 kubectl -n cattle-monitoring-system get helmreleases.helm.cattle.io 
+```
+
+#### Measure Pods with creation and start time
+
+```
+kubectl get pods --all-namespaces -o json | jq -r '
+.items[] |
+  . as $pod |
+  {
+    namespace: .metadata.namespace,
+    name: .metadata.name,
+    created: .metadata.creationTimestamp,
+    readyTime: (
+      .status.conditions[]? |
+      select(.type == "Ready" and .status == "True") |
+      .lastTransitionTime
+    )
+  } |
+  select(.readyTime != null) |
+  .timeToReady = ((
+    ( ( ( .readyTime | fromdateiso8601 ) - ( .created | fromdateiso8601 ) ) )
+  )) |
+  "\(.namespace)/\(.name): \(.timeToReady) seconds"
+'
 ```
 
 #### Prometheus defensive 1
