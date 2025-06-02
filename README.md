@@ -1,4 +1,4 @@
-# 216 Kleine Helferlein
+# 217 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -389,6 +389,11 @@ nsenter -t <container-pid> -n ip link show type veth | grep -Po '(?<=eth0@if)\d*
 docker run --rm -it --entrypoint /bin/sh  ghcr.io/eumel8/wallabag-checklinks/wallabag-checklinks:0.0.4
 ```
 
+#### cleanup overlay2 dir in docker
+
+```
+docker system prune -a --volumes
+```
 
 [Top](#top)
 
