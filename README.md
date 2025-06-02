@@ -707,6 +707,12 @@ kubectl create deployment blog --image eumel8/nginx-none-root
 ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key  --endpoints=https://10.23.142.108:2379 member list
 ```
 
+or
+
+```
+crictl exec -ti <etcd-container-id> etcdctl --cacert /etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key --endpoints=https://[::1]:2379 member list
+```
+
 ####  Restore etcd [in Rancher cluster](https://rancher.com/docs/rancher/v2.x/en/cluster-admin/restoring-etcd/)
 
 ```
