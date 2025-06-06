@@ -1,4 +1,4 @@
-# 217 Kleine Helferlein
+# 218 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -716,6 +716,19 @@ or
 
 ```
 crictl exec -ti <etcd-container-id> etcdctl --cacert /etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key --endpoints=https://[::1]:2379 member list
+```
+
+#### etcd defrag/compact
+
+```
+crictl exec -it 9f1f287abe76a etcdctl --cacert /etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key --endpoints=https://10.23.140.139:2379 alarm list
+alarm:NOSPACE
+# search revision number
+crictl exec -it 9f1f287abe76a etcdctl --cacert /etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key --endpoints=https://10.23.140.139:2379 endpoint status --write-out="json"
+crictl exec -it 9f1f287abe76a etcdctl --cacert /etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key --endpoints=https://10.23.140.139:2379 compact 1309971701
+# repeat last 2 step for all other cluster member
+crictl exec -it 9f1f287abe76a etcdctl --cacert /etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key --endpoints=https://10.23.140.139:2379 defrag --cluster
+crictl exec -it 9f1f287abe76a etcdctl --cacert /etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key --endpoints=https://10.23.140.139:2379 alarm disarm
 ```
 
 ####  Restore etcd [in Rancher cluster](https://rancher.com/docs/rancher/v2.x/en/cluster-admin/restoring-etcd/)
