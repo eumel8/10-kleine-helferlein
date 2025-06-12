@@ -1,4 +1,4 @@
-# 218 Kleine Helferlein
+# 219 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1384,16 +1384,22 @@ sudo spctl --master-disable
 xattr -d com.apple.quarantine <my-prog>
 ```
 
-### Search for apps with network problems
+#### Search for apps with network problems
 
 ```
 sudo lsof -i -n| grep -i micros| grep -i syn
 ```
 
-### Restart Smard Card Reader
+#### Restart Smard Card Reader
 
 ```
 killall ctkd
+```
+
+#### Install app without dependency check/source compiling
+
+```
+brew install --force-bottle bitwarden-cli
 ```
 
 [Top](#top)
