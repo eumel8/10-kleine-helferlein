@@ -1,4 +1,4 @@
-# 219 Kleine Helferlein
+# 222 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -109,6 +109,12 @@ for key in .git-crypt/keys/default/0/* ; do gpg -k $(echo $(basename $key) | sed
 
 ```
 curl -sq --header "PRIVATE-TOKEN: <gitlab-api-token>" "https://gitlab.com/api/v4/projects/188/variables" | jq -r '"export " + .[].key + "=" + .[].value'
+```
+
+#### test target network port with netcat
+
+```
+nc -zv example.com 22
 ```
 
 [Top](#top)
@@ -283,6 +289,18 @@ Alternate: `pip install git-fame`
 ```
 git push --delete origin <tag-name>
 git tag -d <tag-name>
+```
+
+#### test git ssh connection
+
+```
+ssh -T -i ~/.ssh/id_rsa_gitlab git@gitlab.com
+```
+
+#### git reset the hard way
+
+```
+git reset --hard origin/main
 ```
 
 [Top](#top)
