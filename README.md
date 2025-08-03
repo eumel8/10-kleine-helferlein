@@ -1,4 +1,4 @@
-# 222 Kleine Helferlein
+# 223 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -115,6 +115,20 @@ curl -sq --header "PRIVATE-TOKEN: <gitlab-api-token>" "https://gitlab.com/api/v4
 
 ```
 nc -zv example.com 22
+```
+
+#### add/drop traffic with iptables to specific host
+
+add block icmp to jambo
+
+```
+iptables -A OUTPUT -p icmp -d 46.17.63.142 -j DROP
+```
+
+drop block icmp to jambo
+
+```
+iptables -D OUTPUT -p icmp -d 46.17.63.142 -j DROP
 ```
 
 [Top](#top)
