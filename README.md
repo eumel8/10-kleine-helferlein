@@ -1,4 +1,4 @@
-# 223 Kleine Helferlein
+# 224 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -129,6 +129,18 @@ drop block icmp to jambo
 
 ```
 iptables -D OUTPUT -p icmp -d 46.17.63.142 -j DROP
+```
+
+#### find reason why mountpoints busy and can't unmount
+
+```
+lsof +f -- /var/lib/kubelet/pods/2811cb9d-7154-4d66-89cc-d8cbc962e62a/volumes/kubernetes.io~csi/pvc-7b37b1f8-a156-463c-8512-6b6e1c610c85/mount
+```
+
+or 
+
+```
+fuser -m /var/lib/kubelet/pods/2811cb9d-7154-4d66-89cc-d8cbc962e62a/volumes/kubernetes.io~csi/pvc-7b37b1f8-a156-463c-8512-6b6e1c610c85/mount
 ```
 
 [Top](#top)
