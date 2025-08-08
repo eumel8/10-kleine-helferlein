@@ -1,4 +1,4 @@
-# 224 Kleine Helferlein
+# 225 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -327,6 +327,12 @@ ssh -T -i ~/.ssh/id_rsa_gitlab git@gitlab.com
 
 ```
 git reset --hard origin/main
+```
+
+#### git clone with ssh key
+
+```
+GIT_SSH_COMMAND='ssh -i ssh_private.key' git clone  git@github.com/my/repo.git
 ```
 
 [Top](#top)
