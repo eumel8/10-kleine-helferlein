@@ -1,4 +1,4 @@
-# 225 Kleine Helferlein
+# 226 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1395,6 +1395,12 @@ k3s crictl ps
 
 ```
 k3s crictl images
+```
+
+#### Top 10 request on kube-apiserver (audit log)
+
+```
+grep '"requestURI":' kube-apiserver.log   | awk -F'"requestURI":' '{print $2}'   | awk -F'"' '{print $2}'   | sort   | uniq -c   | sort -nr   | head -10
 ```
 
 [Top](#top)
