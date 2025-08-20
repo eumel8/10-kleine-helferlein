@@ -351,6 +351,11 @@ openssl req -new -x509 -days 730 -nodes -out hostname1.pem -keyout hostname1.pem
 openssl x509 -in eumelnetde.pem -noout -text
 ```
 
+stdin
+```
+cat cert.pem | openssl x509 -noout -text
+```
+
 #### Encrypt and Decrypt files with a key
 
 ```
