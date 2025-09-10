@@ -1,4 +1,4 @@
-# 226 Kleine Helferlein
+# 227 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -333,6 +333,14 @@ git reset --hard origin/main
 
 ```
 GIT_SSH_COMMAND='ssh -i ssh_private.key' git clone  git@github.com/my/repo.git
+```
+
+#### git sign with gpg (key almost there)
+
+```
+git config --global gpg.program gpg
+gpgconf --launch gpg-agent
+export GPG_TTY=$(tty)
 ```
 
 [Top](#top)
