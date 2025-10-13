@@ -1,4 +1,4 @@
-# 227 Kleine Helferlein
+# 228 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1069,6 +1069,12 @@ tar -cf - vcluster-backup | kubectl -n kunde2 exec --stdin kunde2-vcluster-0 -- 
 
 ```
 kubectl get secret <secret-name> -n <namespace> -o jsonpath='{.data.csi-vsphere\.conf}' | base64 --decode
+```
+
+#### kubectl list top 10 CR in cluster
+
+```
+kubectl api-resources --verbs=list --namespaced -o name | xargs -I{} sh -c 'echo {}; kubectl get {} --all-namespaces --no-headers 2>/dev/null | wc -l' | paste - - | sort -k2 -nr | head -10
 ```
 
 [Top](#top)
