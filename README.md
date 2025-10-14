@@ -440,9 +440,13 @@ cat /etc/mtab |awk '{print $1}' | sort | uniq -c | sort -n
 
 ```
 crictl inspect <container-id>
-nsenter -t <container-pid> -n ip link show type veth | grep -Po '(?<=eth0@if)\d*'
+nsenter -t $(crictl inspect <container-id> | jq -r .info.pid) -n ip link show type veth | grep -Po '(?<=eth0@if)\d*'
  ip a s| grep 75
 75: veth0147df81@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master cni0 state UP group default
+
+# or
+
+nsenter -t $(crictl inspect $(crictl inspect <container-id> | jq -r .info.pid)  | jq -r .info.pid) -n ip addr
 ```
 
 #### overwrite entrypoint for a container to run
