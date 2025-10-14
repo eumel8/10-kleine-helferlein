@@ -447,6 +447,11 @@ nsenter -t $(crictl inspect <container-id> | jq -r .info.pid) -n ip link show ty
 # or
 
 nsenter -t $(crictl inspect $(crictl inspect <container-id> | jq -r .info.pid)  | jq -r .info.pid) -n ip addr
+
+# and 
+
+ip link delete vethef47802d79d
+
 ```
 
 #### overwrite entrypoint for a container to run
