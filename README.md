@@ -806,7 +806,12 @@ crictl exec -it 9f1f287abe76a etcdctl --cacert /etc/kubernetes/pki/etcd/ca.crt -
 #### etcd count versions per object (to find out slow response)
 
 ```
-kubectl -n kube-system exec etcd-k8s -- etcdctl --cacert /etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key --endpoints=https://localhost:2379 get "" --prefix --write-out=json | jq -r '[.kvs[] | {key: (.key | @base64d), version: (.version | tonumber)}] | sort_by(.version) | reverse | .[] | "\(.version)\t\(.key)"
+kubectl -n kube-system exec etcd-k8s -- etcdctl --cacert /etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key --endpoints=https://localhost:2379 get "" --prefix --write-out=json | jq -r '[.kvs[] | {key: (.key | @base64d), version: (.version | tonumber)}] | sort_by(.version) | reverse | .[] | "\(.version)\t\(.key)"'
+```
+
+
+```
+kubectl -n kube-system exec etcd-k8s -- etcdctl --cacert /etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key --endpoints=https://localhost:2379 get "/registry/configmaps/" --prefix --write-out=json | jq -r '[.kvs[] | {key: (.key | @base64d), version: (.version | tonumber)}] | sort_by(.version) | reverse | .[] | "\(.version)\t\(.key)"'
 ```
 
 #### Restore etcd [in Rancher cluster](https://rancher.com/docs/rancher/v2.x/en/cluster-admin/restoring-etcd/)
