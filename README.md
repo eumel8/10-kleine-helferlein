@@ -1445,6 +1445,33 @@ auth mod in kube-apiserver ersetzen mit:
 #- --authorization-mode=Node,RBAC
 ```
 
+minimal set:
+
+```
+# cluster-admin.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-admin
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+# cluster-admin-binding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubernetes-admin-binding
+subjects:
+- kind: User
+  name: kubernetes-admin
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+```
+
 #### Top 10 request on kube-apiserver (audit log)
 
 ```
