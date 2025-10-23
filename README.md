@@ -1,4 +1,4 @@
-# 228 Kleine Helferlein
+# 229 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1423,6 +1423,15 @@ k3s crictl ps
 
 ```
 k3s crictl images
+```
+
+#### Kubernetes Cluster ausgesperrt (kubeadm)
+
+auth mod in kube-apiserver ersetzen mit:
+
+```
+- --authorization-mode=AlwaysAllow
+#- --authorization-mode=Node,RBAC
 ```
 
 #### Top 10 request on kube-apiserver (audit log)
