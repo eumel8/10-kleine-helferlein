@@ -1,4 +1,4 @@
-# 230 Kleine Helferlein
+# 231 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1717,6 +1717,20 @@ sum by(username, resource)(rate(apiserver_request_total{resource=~"secrets|confi
 
 ```
 rate(apiserver_request_total{verb=~"CREATE|UPDATE|PATCH|DELETE",scope=~"cluster"}[5m])
+```
+
+#### Metrics call by Kubernetes API
+
+```
+kubectl get --raw '/metrics' 
+kubectl get --raw '/api/v1/nodes/<node-name>/proxy/metrics' # node-exporter
+kubectl get --raw '/api/v1/nodes/<node-name>/proxy/metrics/cadvisor' # cadvisor
+kubectl get --raw '/apis/custom.metrics.k8s.io/v1beta1/namespaces/default/pods/*/buffer_space_usage_ratio' # older example
+kubectl get --raw '/apis/metrics.k8s.io/v1beta1/pods' | jq -r # all pod metrics
+kubectl get --raw '/api/v1/namespaces/kube-system/pods/calico-kube-controllers-59dbcf78b8-hf6ws:9094/proxy/metrics' # pod
+kubectl get --raw '/api/v1/namespaces/kube-system/pods/coredns-5786b797c-pfgrx:9153/proxy/metrics' # pod
+kubectl get --raw '/api/v1/nodes/<node-name>:8080/proxy/v1/metrics' # containerd
+kubectl get --raw '/api/v1/nodes/<node-name>:9379/proxy/metrics' # etcd
 ```
 
 #### Ubuntu Kernel Pinning
