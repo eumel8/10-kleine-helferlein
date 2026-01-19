@@ -1,4 +1,4 @@
-# 231 Kleine Helferlein
+# 234 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -341,6 +341,13 @@ GIT_SSH_COMMAND='ssh -i ssh_private.key' git clone  git@github.com/my/repo.git
 git config --global gpg.program gpg
 gpgconf --launch gpg-agent
 export GPG_TTY=$(tty)
+```
+
+#### show big objects in git (top 20)
+
+```
+git verify-pack -v .git/objects/pack/*.idx | sort -k3 -n | tail -20
+git rev-list --objects --all | grep 9d5d1214079f75f2e292bfc374c7c91ae5928876
 ```
 
 [Top](#top)
