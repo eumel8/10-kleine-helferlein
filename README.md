@@ -1,4 +1,4 @@
-# 234 Kleine Helferlein
+# 235 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1911,6 +1911,13 @@ done
 ```
 apt install imagemagick-6.q16
 mogrify -resize 25% mr5a.jpg
+```
+
+#### Keyboard layout change
+
+```
+dpkg-reconfigure keyboard-configuration
+setupcon
 ```
 
 [Top](#top)
