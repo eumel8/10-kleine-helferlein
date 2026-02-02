@@ -1,4 +1,4 @@
-# 235 Kleine Helferlein
+# 236 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -348,6 +348,12 @@ export GPG_TTY=$(tty)
 ```
 git verify-pack -v .git/objects/pack/*.idx | sort -k3 -n | tail -20
 git rev-list --objects --all | grep 9d5d1214079f75f2e292bfc374c7c91ae5928876
+```
+
+#### delete local branches with git (many, already merged)
+
+```
+git branch --merged |grep -vx "$(git branch --show-current)" |xargs -r git branch -d
 ```
 
 [Top](#top)
