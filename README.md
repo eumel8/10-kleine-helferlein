@@ -1,4 +1,4 @@
-# 236 Kleine Helferlein
+# 237 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1924,6 +1924,12 @@ mogrify -resize 25% mr5a.jpg
 ```
 dpkg-reconfigure keyboard-configuration
 setupcon
+```
+
+#### Which metrics comes from a scrape job in Prometheus
+
+```
+count by (__name__) ({job="trident-csi"})
 ```
 
 [Top](#top)
