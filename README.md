@@ -1,4 +1,4 @@
-# 237 Kleine Helferlein
+# 238 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1694,6 +1694,12 @@ kubectl get helmreleases -n cattle-monitoring-system --watch -o=jsonpath="{.meta
 
 ```
 kubectl -n cattle-monitoring-system get helmreleases.helm.cattle.io 
+```
+
+#### Log Coredns Logs with Timestamp
+
+```
+kubectl -n kube-system logs -l k8s-app=kube-dns -f --timestamps=true
 ```
 
 #### Measure Pods with creation and start time
