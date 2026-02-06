@@ -1,4 +1,4 @@
-# 238 Kleine Helferlein
+# 239 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1292,6 +1292,12 @@ docker run --rm --net=host -v $(docker inspect kubelet --format '{{ range .Mount
 TOKEN=$(kubectl -n cattle-system get secret `kubectl -n cattle-system get sa cattle -o jsonpath={.secrets[0].name}` -o jsonpath={.data.token} | base64 -d)
 curl -v -k -H "Authorization: Bearer $TOKEN" https://127.0.0.1:6443/api/v1/namespaces/cattle-monitoring-system/services/http:rancher-monitoring-grafana:80/proxy
 curl -v -k -H "Authorization: Bearer $TOKEN" https://127.0.0.1:6443/api/v1/namespaces/cattle-monitoring-system/services/http:rancher-monitoring-alertmanager:9093/proxy
+```
+
+#### How many alerts are handled by alertmanager
+
+```
+curl -s "http://alertmanager-headless:9093/api/v2/alerts" | jq length
 ```
 
 #### Debug Banzaicloud Logging Operator in Rancher
