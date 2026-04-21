@@ -1,4 +1,4 @@
-# 239 Kleine Helferlein
+# 240 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -53,6 +53,18 @@ do
 /bin/mknod -m640 /dev/loop$i b 7 $i
 /bin/chown root:disk /dev/loop$i
 done
+```
+
+#### lvm volume expand (Citrix Xen, Proxmox)
+
+```
+# extend volume in vCenter
+# typical Ubuntu disc laylout with /dev/sda1 as pv
+growpart /dev/sda 3
+pvresize /dev/sda3
+lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+resize2fs /dev/ubuntu-vg/ubuntu-lv
+lsblk
 ```
 
 ### rpm/deb cheats:
