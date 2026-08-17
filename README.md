@@ -1,4 +1,4 @@
-# 240 Kleine Helferlein
+# 241 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1885,6 +1885,12 @@ cd /mnt/ramdisk
 zcat /boot/ipa-initrd-5.15.0-136-generic.gz | cpio -idmv
 cat rootfs.cxz | unxz |cpio -idmv 
 ``` 
+#### Merge/Delete Snapshot in Hypervisor Windows 11
+
+```
+#powershell
+Get-VMCheckpoint -VMName Win11-2 | Remove-VMCheckpoint
+```
 
 #### SMB 1.0 activation Windows 11
 
