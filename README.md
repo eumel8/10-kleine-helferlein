@@ -1,4 +1,4 @@
-# 241 Kleine Helferlein
+# 243 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1867,6 +1867,48 @@ cmd as Administrator
 ```
 netsh interface portproxy set v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=8080 connectaddress=127.0.0.1
 ```
+
+#### WSL Speicherplatz aufräumen
+
+```bash
+sudo fstrim -av
+```
+
+Dann WSL herunterfahren und VHDX auf Sparse umstellen — schrumpft dauerhaft automatisch auf den real belegten Platz (Windows 11 22H2+):
+
+```powershell
+wsl --shutdown
+wsl --manage Ubuntu-24-04 --set-sparse true
+```
+
+Danach WSL einfach wieder normal starten.
+
+Fallback (einmaliges Kompaktieren, funktioniert immer):
+
+```powershell
+wsl --shutdown
+diskpart
+select vdisk file="C:\Users\eumel\AppData\Local\wsl\Ubuntu-24-04\ext4.vhdx"
+attach vdisk readonly
+compact vdisk
+detach vdisk
+exit
+```
+
+#### Was belegt mein Home Dir
+
+
+| Was | Größe | Clean-Befehl |
+|---|---|---|
+| Ollama-Modelle (`/usr/local/lib/ollama`) | ~4,7 GB | `ollama list` → nicht gebrauchte mit `ollama rm <modell>` löschen |
+| Bun-Cache (`~/.bun`) | ~5,6 GB | `bun pm cache rm` |
+| Go-Modul-Cache (`~/gopath/pkg`) | ~5,1 GB | `go clean -modcache` |
+| System (`/usr/lib`, `/usr/bin`, …) | ~3,7 GB | nicht anfassen |
+| Git-Repos (`~/git`) | ~2,7 GB | ungenutzte Repos löschen, `.git`-History ggf. verkleinern |
+| npm-Cache (`~/.npm/_cacache`) | ~1,2 GB | `npm cache clean --force` |
+| Playwright-Browser (`~/.cache/ms-playwright`) | ~1,4 GB | `npx playwright uninstall` |
+| Docker/System (`/var`) | ~2,1 GB | `docker system prune` u. ä. |
+
 
 #### Generate new machine id in LXD container to get a new dhcp ip
 
