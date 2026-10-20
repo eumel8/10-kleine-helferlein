@@ -1,4 +1,4 @@
-# 243 Kleine Helferlein
+# 244 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -371,6 +371,13 @@ git branch --merged |grep -vx "$(git branch --show-current)" |xargs -r git branc
 [Top](#top)
 
 ## <a name="openssl">OpenSSL</a>
+
+#### Firefox laesst wegen strict ssl Verbindung nicht zu
+
+```
+about:config
+network.stricttransportsecurity.preloadlist: false
+```
 
 #### Openssl: SSL-Zertifikat anlegen (fuer apache, postfix usw.)
 
