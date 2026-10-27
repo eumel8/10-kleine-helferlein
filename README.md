@@ -1,4 +1,4 @@
-# 244 Kleine Helferlein
+# 245 Kleine Helferlein
 
 <a href="https://github.com/eumel8/10-kleine-helferlein"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
 
@@ -1916,6 +1916,15 @@ exit
 | Playwright-Browser (`~/.cache/ms-playwright`) | ~1,4 GB | `npx playwright uninstall` |
 | Docker/System (`/var`) | ~2,1 GB | `docker system prune` u. ä. |
 
+#### NodeJs updaten mit nvm
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash
+source ~/.bashrc
+nvm install --lts
+nvm use --lts
+node -v
+```
 
 #### Generate new machine id in LXD container to get a new dhcp ip
 
